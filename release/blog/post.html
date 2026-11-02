@@ -1,0 +1,113 @@
+<!-- wp:paragraph -->
+<p><em>The Peutinger Table is a Roman road map squeezed onto a strip of parchment 6.8 metres long and 34 centimetres high. I found 465 of its places by eye, set it beside a modern map and measured its roads. The shape is hopeless. The numbers are not.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/peutinger/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://doi.org/10.5281/zenodo.23882605">Read the paper</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph -->
+<p>In the Austrian National Library in Vienna lies a medieval copy of a Roman map: eleven sheets of parchment glued into one long strip. On it the whole Roman world, and some of the world beyond, from the mouth of the Rhine to the tip of India, is pressed flat like a flower in a book. The seas are thin grey-green ribbons. Italy lies on its side. Yet the map is covered in roads, red lines with a little kink at every stopping place, and beside each stretch of road is a number: how far to the next station.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The OmnesViae project by René Voorburg, built on Richard Talbert's edition of the map, turns it into a dataset of 2,762 stations and 2,971 road legs on the surviving sheets. I used that, found 465 of the places on Konrad Miller's 1887 facsimile, and put the scroll and a modern map side by side.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_maps.png|Top, the whole Peutinger Table in two long strips, dotted with coloured markers by region, with Kent, Lyon, Rome, Carthage, Constantinople, Antioch, Persepolis and Muziris labelled. Bottom, a modern map of Europe, North Africa and Asia with the same places and thin red lines for the Tabula's road legs, from Britain to south India|The Peutinger Table, in two halves, and the same places today.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A world pressed flat</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The places I located span about 8,526 km east to west and 4,676 km north to south. On the parchment, one centimetre covers about 12.6 km east to west but 137.5 km north to south: the world is squashed about 11 times more in one direction than the other. Some regions suffer more than others. North Africa becomes a ribbon of coast 55 times more stretched one way than the other; Italy, laid along the strip from north-west to south-east, about 10 times.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>To see this I fitted a smooth surface through the located places and used it to bend today's coastline onto the scroll. The real coasts of Italy land almost exactly on the Tabula's seas.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_warp.png|A long strip of the Peutinger Table showing Italy, lying on its side between two grey-green bands of sea, with blue lines for the modern coastline bent to fit: the Adriatic coast runs along the upper sea and the Tyrrhenian coast along the lower one. Aquileia, Ravenna, Rome, Naples, Brindisi and Carthage are labelled|Italy on the scroll, with today's coastline bent to fit.}}
+
+{{IMG|b_stretch.png|Bar chart of how stretched each region is drawn, on a log scale: North Africa about 55 times, the Alps and Danube about 21, Egypt and Cyrene about 19, Greece and Thrace 11, Italy 10, Asia Minor and Gaul about 7 to 8, the Levant about 6, Mesopotamia about 2 and Persia and India under 2|How stretched each region is drawn.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">But the numbers are right</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The figures on the map carry no unit. Scholars read them as Roman miles, except in Gaul, where they are Gallic leagues of one and a half miles; beside Lyon the map itself says "usque hic legas", leagues up to here. The measurements agree. Outside Gaul, one unit covers a median 1.41 km as the crow flies. In Gaul north of Lyon and the Rhineland it covers 2.15 km, 1.52 times as much. Read as miles, Gaul's figures would be far too short; read as leagues, they are right to within a few per cent.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_units.png|Dot chart of kilometres per unit on the map for each Roman province: Belgica, Aquitania, Lugdunensis and the two Germanies cluster around 2.1 to 2.3 km, close to a dashed line for the Gallic league, while every other province sits between about 1.2 and 1.7 km, around a dashed line for the Roman mile at 1.48 km|How much ground one unit on the map covers, province by province.}}
+
+<!-- wp:paragraph -->
+<p>Converted that way, I compared every leg I could with the road network of the Itiner-e atlas of Roman roads. For 1,558 legs, the median road is 10% longer than the figure on the map and the median straight line 4% shorter, just where a road distance should sit. 53% agree with the road to within 25%. Over long journeys the errors cancel: by the Tabula's own figures it is 1,120 km from Rome to Vienna, against 1,038 km along the mapped roads, and 1,487 to Cologne, against 1,444.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_distance.png|Scatter plot on log scales of the distance written on the map against the distance along the Roman road for about 1,500 road legs, coloured by region. Most dots lie along the diagonal, inside a shaded band of 25% either way, with a scatter of outliers above and below|Each leg: the distance on the map against the distance along the road.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Who gets the parchment, and where is Rome?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Italy takes 17.3% of the surviving scroll for 6.6% of the empire's land, 2.6 times its share. Mesopotamia, Greece and the Levant are also generous; Gaul, North Africa and Asia Minor get about their fair share. Rome itself, enthroned in a gold circle, is not in the middle of what survives: it sits 35% of the way along. The first sheet is lost, but one lost sheet is not enough to centre it. It would take about 3.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_rome.png|Three rows of rectangles for the eleven surviving sheets of the map, with a gold dot for Rome and a dashed line for the middle. As it survives Rome is 35% along; with one lost sheet added at the left, 41%; with three, 49%, almost exactly in the middle|Rome sits in the middle only if about three sheets are lost.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">79,000 kilometres of road</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Adding up every figure on the surviving sheets gives about 79,414 km of road. Walking it, at the 20 to 25 km a day a Roman traveller managed on foot, would take 3,530 days, close to 10 years. By the map's own figures, Rome to Constantinople is 92 days on foot and Rome to Jerusalem 156. The Tabula draws no sea routes, so Carthage, a few days away by ship, is 6,561 km by its roads, the long way round the whole eastern Mediterranean.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_days.png|Bar chart of days from Rome on foot and by courier by the Tabula's own figures: Lyon 40 days on foot, Vienna 50, Cologne 66, London 78, Constantinople 92, Athens 98, Seville 110 (mostly on rebuilt western roads), Antioch 132, Jerusalem 156, Alexandria 169, Ctesiphon 175 and Persepolis 193|Days from Rome, by the map's own figures.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How I did this</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The stations, their identifications and coordinates, and the legs with their figures are from OmnesViae, after Talbert's edition; I used them as given. The 465 positions on the scroll are my own, read off Miller's facsimile, so they favour legible, well-known places. Units are assigned by province. Road distances follow the Itiner-e network, which includes every bend of the road, so they lean long. The lost western sheet, which OmnesViae rebuilds from another Roman road book, the Antonine Itinerary, is kept separate throughout. The paper sets out the methods and their limits in full.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/peutinger/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://doi.org/10.5281/zenodo.23882605">Read the paper</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://github.com/Tristan-Hotham/peutinger">Data and code</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Notes and sources</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><a href="https://omnesviae.org/">OmnesViae</a> by René Voorburg, after R. J. A. Talbert, Rome's World: the Peutinger Map Reconsidered (2010). Used as factual data, with credit.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Konrad Miller's 1887 facsimile, <a href="https://commons.wikimedia.org/wiki/File:TabulaPeutingeriana.jpg">Wikimedia Commons</a>, public domain.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Itiner-e, the digital atlas of ancient roads (CC BY 4.0); Digital Atlas of the Roman Empire provinces (CC BY-SA); <a href="https://pleiades.stoa.org/">Pleiades</a> (CC BY 3.0); <a href="https://www.naturalearthdata.com/">Natural Earth</a>; Wikipedia, <a href="https://en.wikipedia.org/wiki/Roman_roads">Roman roads</a>, for travel speeds (CC BY-SA 4.0).</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
