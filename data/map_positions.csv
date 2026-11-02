@@ -1,0 +1,466 @@
+tp_id,label,x,y,conf
+548,Ratupis,622,635,high
+547,Dubris,628,700,high
+549,Lemavio,615,765,medium
+552,Lugduno,885,590,high
+553,Pretorium Agrippine,1000,575,high
+563,Foro Adriani,960,600,high
+582,Gesogiaco quod nunc Bononia,885,665,high
+697,Burdegalo,520,940,high
+755,Tolosa,825,1070,high
+735,Aginnum,1020,1030,high
+763,Carcassione,1205,1095,high
+7,Rusuccuru colonia,1040,1295,high
+668,Condate,1085,825,medium
+686,Gesocribate,855,836,high
+753,Eliberre,580,1030,medium
+772,Iuncaria,800,1125,high
+738,Bibona,1225,1035,high
+766,Narbone,1672,1185,high
+784,Arelato,2415,1125,high
+747,Aquis Segete,2280,1080,medium
+652,Aquis Segeste,1890,805,high
+724,Aquis Calidis,1880,1035,high
+664,Aquis Bormonis,2040,980,high
+630,Luteci,1790,735,high
+599,Aug Suessorum,1820,660,high
+609,Durocortoro,2235,693,high
+601,Sammarobriva,1430,620,high
+621,Ratumagus,1330,682,high
+625,Mediolano Aulercorum,1355,740,high
+650,Cenabo,1730,788,high
+649,Caesaroduno,1580,815,high
+695,Argantomago,1555,955,medium
+677,Avaricum,1783,877,high
+741,Segodum,1540,1090,high
+14,Saldas colonia,2055,1298,high
+93,Sitifi colonia,1470,1435,high
+90,Culchul colonia,1995,1358,high
+782,Nemuso,2190,1148,high
+681,Cabillione,2440,845,high
+921,Andemantunno,2305,738,high
+777,Ruscione,1530,1180,high
+575,Agrippina,2675,520,high
+871,Bonnae,2772,525,high
+878,Mogontiaco,3472,522,high
+897,Aug Tresvirorum,3010,622,high
+730,Lugduno caput Galliarum,2485,915,medium
+807,Vigenna,2685,980,high
+840,Massilia Grecorum,2683,1168,high
+833,Aquis Sestis,2792,1158,high
+837,Foro Iulii,3310,1175,high
+845,Antipoli,3500,1180,high
+792,Glano,2515,1115,medium
+787,Arusione,2665,1020,high
+791,Valentia,2755,1012,high
+940,Lacum Losonne,3380,825,high
+941,Aventicum Helvetiorum,3282,780,high
+924,Vesontine,2730,762,high
+169,Lambese,3305,1455,high
+874,Confluentes,3080,495,high
+873,Antunnaco,2970,512,high
+877,Bingium,3400,512,high
+939,Eburoduno,3040,768,high
+825,Brigantione,3580,1000,high
+805,Eburuno,3480,1000,high
+885,Argentorate,4065,568,high
+890,Augusta Ruracum,4480,618,high
+957,Augusta Pretoria,4395,822,high
+830,Augusta Taurinorum,4620,857,high
+856,Aquis Tatelis,4470,1062,high
+866,Genua,4655,1100,high
+30,Rusicade colonia,3718,1295,high
+104,Milev colonia,3782,1348,high
+43,Cirta colonia,4625,1342,high
+171,Thamugadi,4035,1460,high
+853,Vadis Sabates,4175,1130,high
+852,Albingauno,4030,1112,high
+849,Albentimillo,3835,1112,high
+953,Octoduro,3900,755,high
+859,Eporedia,4665,725,high
+1055,Vergellis,4815,720,high
+863,Hasta,4500,1130,medium
+828,Segusione,4200,922,high
+972,Brigobanne,4805,562,high
+891,Vindonissa,4548,602,high
+943,Salodurum,3970,675,high
+974,Samulocenis,5140,518,high
+1000,Augusta Vindelicum,5270,572,high
+1024,Como,5420,655,high
+1048,Mediolanum,5555,738,high
+1058,Ticeno,5390,765,high
+1051,Placentia,5838,810,high
+1049,Laude Pompeia,5625,732,high
+1025,Bergomum,5655,630,high
+1042,Brixia,5990,640,high
+1052,Cremona,5975,725,high
+1080,Luca,5170,1005,high
+1089,Pisis,5250,1090,high
+1106,Aquas Volaternas,5720,1085,high
+1109,Aquae Populaniae,5900,1058,high
+1105,Vadis Volateris,5590,1130,high
+1104,Velinis,5500,1130,high
+1082,Pistoris,5430,950,high
+1086,Florentia Tuscorum,6030,980,high
+1107,Populonio,5660,1135,high
+37,Hippone Regio,5670,1280,high
+44,Aquis Thibilitanis,5055,1330,high
+2934,Turribus,4948,1220,high
+2935,Caralis,5025,1212,high
+109,Thibili,5975,1345,high
+204,Ad Aquas Herculis,5035,1470,high
+1004,Cambodunum,5575,532,high
+989,Regino,6505,475,high
+993,Ovilia,6830,505,high
+1036,Tredente,6215,578,high
+1039,Verona,6412,668,high
+1125,Aquileia,7085,662,high
+1127,Altino,6895,735,high
+1054,Mantua,6545,785,high
+1069,Bononia,6728,875,high
+1067,Mutina,6505,862,high
+1064,Parna,6175,812,high
+1126,Patavis,6745,705,high
+1040,Vicetia,6595,682,high
+1124,Concordia,6920,655,high
+1111,Sena Iulia,6220,1048,high
+1096,Adretio,6700,948,high
+1100,Clusio,7028,1005,high
+1120,Cosa,6545,1100,high
+1094,Bituriza,6302,982,medium
+120,Sicca Veneria,7040,1328,high
+65,Simitu colonia,7210,1318,high
+180,Theveste,7080,1412,high
+179,Ad Aquas Caesaris,6700,1410,high
+215,Theleote,7265,1440,medium
+112,Tipasa,6155,1312,medium
+1013,Iuvavo,6505,612,high
+1150,Foro Corneli,7165,905,high
+1148,Claterna,6935,890,high
+1047,Hostilia,6900,820,high
+1542,Vindobona,7840,455,high
+1545,Carnunto,8130,445,high
+1571,Viruno,7900,548,high
+1583,Celeia,8108,598,high
+1564,Petavione,8290,600,high
+1561,Sabarie,8220,520,high
+1585,Emona,7645,645,high
+1536,Tergeste,7325,668,high
+1537,Parentio,7450,660,high
+1611,Pola,7518,755,high
+1140,Ravenna,7668,915,high
+1155,Curva Cesena,7685,972,high
+1144,Arimino,7952,920,high
+1145,Pisauro,8030,902,high
+1146,Fano Fortunae,8105,895,high
+1226,Volsinis,7440,1038,high
+1227,Aquas Passaris,7625,1068,high
+1241,Tarquinis,8110,1100,high
+52,Ipponte Diarito,7665,1272,high
+66,Bulla Regia,7285,1300,high
+218,Capsa colonia,7610,1450,high
+1618,Senia,8058,765,high
+1617,Tarsatica,7860,778,high
+1236,Foro Clodo,8135,1052,high
+1220,Faleros,8400,1008,high
+1153,Foro Livi,7455,930,high
+1152,Faventia,7365,928,high
+1218,Ameria,7955,1012,high
+1203,Roma,9505,1005,high
+1428,Hostis,9660,1115,high
+1550,Brigantio,8622,458,high
+1554,Aquinco,9060,452,high
+1609,Siscia,9258,565,high
+1628,Iadera,8662,765,high
+1633,Sardona,9100,648,high
+1184,Firmo Viceno,8992,837,high
+1181,Castello Firmani,9258,773,high
+1211,Spoletio,8675,1038,high
+1214,Interamnio,8920,968,high
+1199,Reate,9248,863,high
+1198,Aque Cutillie,9155,875,high
+1242,Aquas Apollinaris,8640,1135,high
+55,Utica colonia,8660,1268,high
+60,Carthagine colonia,9495,1282,high
+137,Tuburbomaius,9190,1340,high
+1177,Asclopiceno,8650,910,high
+1212,Fano Fugitivi,8755,1018,high
+1223,Veios,8975,1012,high
+1258,Pyrgos,8920,1125,high
+1259,Alsium,9135,1125,high
+1652,Mursa maior,10178,528,high
+1639,Cornaco,10490,460,high
+1660,Servitio,9862,600,high
+1681,Salona,10765,585,high
+1707,Spalato,10825,635,high
+1298,Corfinio,10182,868,high
+1291,Marrubio,10088,895,high
+1299,Sulmone,10365,848,high
+1266,Hadria,9810,787,high
+1268,Ostia Aterni,9972,815,high
+1312,Preneste,9730,922,high
+1309,Carsulis,9855,922,medium
+1322,Conpito Anagnino,9912,1012,high
+1323,Ferentinum,10150,1030,high
+1422,Aricia,9832,1048,high
+1424,Tres Tabernas,9980,1078,high
+1426,Terracina,10250,1150,high
+1436,Fundis,10350,1130,high
+1437,Formis,10420,1103,high
+1438,Menturnis,10490,1135,high
+1440,Sinuessa,10595,1140,high
+1329,Teano Scedicino,10765,1012,high
+1327,Casinum,10505,1012,high
+1326,Aquino,10395,1040,high
+1274,Larinum,10415,812,high
+1277,Siponto,10662,783,high
+1334,Bobiano,10835,860,high
+1302,Esernie,10735,932,high
+150,Hadrito,10458,1300,high
+256,Lepteminus,10650,1280,high
+199,Thisdro col,10750,1322,high
+196,Aquas Regias,10135,1358,high
+259,Sullecti,10785,1275,high
+255,Ruspina,10570,1260,high
+261,Tapsum,10710,1268,high
+144,Maxula,9705,1255,high
+1657,Sirmium,11212,510,high
+1646,Tauruno,11585,448,high
+1648,Singiduno,11948,452,high
+1698,Narona,11432,618,high
+1803,Epitauro,11988,618,high
+1342,Benebento,11432,930,high
+1454,Capuae,11062,1045,high
+1466,Neapoli,11200,1125,high
+1476,Pompeis,11600,1115,high
+1464,Nuceria,11685,1108,high
+1364,Salerno,11790,1108,high
+1473,Puteolis,11048,1095,high
+1470,Cumas,10890,1168,high
+1350,Venusie,11492,788,high
+1345,Butuntos,11505,755,high
+1287,Gnatie,11765,735,high
+1375,Brindisi,11965,750,high
+1284,Barium,11430,725,high
+1474,Herclanium,11280,1122,high
+1478,Surrento,11585,1205,high
+1490,Lilybeo,11872,1222,high
+1506,Aquas Labodes,11970,1205,high
+1491,Panormo,11950,1175,medium
+228,Tacape col,11615,1365,high
+265,Taparura,11105,1290,high
+267,Macomades Minores,11230,1265,high
+1717,Viminatio,12618,502,high
+1801,Scobre,12355,592,high
+1841,Dyrratio,12635,635,high
+1852,Apollonia,12790,722,high
+1858,Aulona,12850,762,high
+1380,Tarento,12110,815,high
+1384,Ydrunte,12330,715,high
+1385,Castra Minervae,12505,725,high
+1408,Regio,12628,1065,high
+1499,Messana,12518,1122,high
+1511,Siracusis,12405,1170,medium
+1505,Tauromenio,12380,1120,high
+1420,Lacenium,12562,867,high
+1400,Aque Ange,12265,955,high
+289,Sabrata,12640,1235,high
+292,Osa col,12902,1205,high
+1857,Actanicopoli,13200,1062,medium
+1818,Scupis,13225,698,medium
+1780,Horrea Margi,13010,565,high
+1415,Heraclea,12240,835,high
+1854,Hadrianopoli,13095,792,high
+1507,Agrigento,12065,1185,high
+1784,Naisso,13495,645,high
+1769,Ratiaris,13760,585,high
+1740,Sarmategte,13890,468,high
+1741,Ad Aquas,14018,460,medium
+1791,Sertica,14082,668,high
+1826,Stopis,13875,710,high
+1848,Lignido,13672,792,high
+1865,Larissa,13840,815,high
+1890,Athenas,14345,1008,high
+1885,Megara,13975,945,high
+1893,Corintho,13988,1042,high
+1906,Pathras,13730,1040,high
+1902,Olympia,13565,1128,high
+1901,Lacedemone,14220,1172,high
+1898,Argos,14043,1092,high
+1917,Mothone,13888,1143,high
+1874,Elatia,14245,965,high
+2001,Phinipopolis,14450,678,high
+300,Leptimagna col,13310,1240,high
+1816,Ad Herculem,13352,675,high
+1872,Thermopylas,14060,880,high
+1880,Naupactos,13670,912,high
+1899,Epitauro,14200,1095,medium
+1788,Romesiana,13600,655,high
+1745,Apula,14548,480,high
+1926,Napoca,14962,515,high
+1930,Porolisso,15330,492,high
+1944,Durostero,15018,600,high
+1947,Axiopolis,15265,580,high
+1951,Troesmis,15512,545,high
+1958,Odessos,15440,690,high
+1988,Marcianopolis,15142,672,high
+2013,Hadrianopoli,15358,832,high
+1836,Tessalonice,14765,990,high
+2050,Heraclea Santica,14825,920,high
+2040,Philippis,15190,985,high
+2042,Neapolis,15330,955,medium
+2039,Amphipoli,15028,998,high
+2029,Pella,14882,882,medium
+1996,Nicopolistro,14868,668,high
+2008,Aquis calidis,15670,765,medium
+2082,Constantinopolis,16700,780,high
+1957,Tomis,15962,562,high
+1967,Ancialis,15948,692,high
+1976,Perintus,16312,772,high
+2080,Sycas,16705,665,high
+1985,Callipoli,16495,955,high
+1986,Sestos,16615,985,high
+2070,Cortina,16528,1082,high
+2059,Cydonia,16022,1045,high
+2071,Cnoso,16620,1092,high
+343,Ptolomaide,15862,1150,high
+342,Tauchira col,15800,1175,high
+341,Hadrianopolis,15922,1212,high
+340,Bernicide,15865,1290,high
+347,Cyrenis col,16252,1240,high
+346,Balacris,16148,1215,high
+348,Appollonia,16310,1240,high
+1981,Apris,16342,878,medium
+1962,Callatis,15660,570,high
+1966,Mesembria,15820,682,high
+1968,Appollonia,16030,668,high
+2084,Chrisoppolis,16865,655,high
+2108,Calcedonia,16885,708,high
+2110,Nicomedia,17225,745,high
+2129,Nicea,17265,922,high
+2109,Livissa,17035,708,medium
+2202,Prusias,17240,1005,high
+2195,Cyzico,17075,978,high
+2204,Pergamo,17765,1015,high
+2188,Tyatira,17948,1045,high
+2180,Philadelfia,17925,968,high
+2152,Dorileo,17490,880,high
+2155,Pesinunte,17785,835,high
+2168,Synnada,17970,865,high
+2134,Iuliopoli,17630,795,high
+2211,Gargara,17385,1090,high
+2212,Antandros,17450,1095,high
+2213,Adrimitio,17535,1095,high
+2207,Ilio,17122,1095,high
+2208,Alexandria Troas,17045,1073,high
+387,Memphis,17768,1372,high
+423,Babylonia,17830,1372,high
+412,Tyconpoli,17495,1322,high
+411,Panopoli,17400,1325,high
+391,Syene,16820,1400,high
+393,Ombos,16880,1400,high
+394,Tentira,16975,1400,high
+2139,Ancyra,18140,775,medium
+2104,Sinope,18668,640,high
+2122,Amasia,18968,680,high
+2144,Tavio,18725,732,high
+2187,Ephesum,18572,1078,high
+2190,Smyrna,18200,1062,high
+2384,Miletum,18798,1045,high
+2354,Laudicium Pilycum,18790,975,high
+2346,Apamea Ciboton,18985,955,high
+374,Pelusio,18130,1152,high
+434,Ascalone,18630,1178,high
+438,Helya Capitolina,18815,1268,medium
+440,Ioppe,18838,1158,high
+442,Cesaria,19012,1190,high
+445,Neapoli,18958,1235,high
+461,Scytopoli,19160,1295,high
+458,Herichonte,18928,1305,high
+473,Philadelfia,18725,1372,high
+477,Bostris,18975,1342,high
+468,Petris,18425,1362,high
+487,Tyro,19240,1228,high
+486,Ptolomaide,19140,1210,high
+2297,Tyana,19168,838,high
+2357,Perge,19100,998,high
+2390,Patras,19190,1062,medium
+2170,Philomelo,18120,848,high
+2182,Hierapoli,18290,948,high
+2183,Trallis,18440,968,high
+2229,Magnesia,18525,1018,high
+2396,Trapezunte,19485,550,high
+2283,Mazaca Cesarea,19590,835,high
+2269,Comana Pontica,19378,762,high
+2257,Neocesaria,19413,698,high
+2242,Polemonio,19835,732,high
+2290,Sevastia,20380,755,high
+2307,Comana Capadocia,20222,818,high
+2327,Tarso Cilicie,20075,822,high
+2331,Anazarbo,20250,932,high
+2329,Mompsistea,20235,895,high
+2333,Alexandria Catisson,20268,1082,high
+532,Seleucia Pieria,20355,1120,medium
+530,Laudiciae,20165,1225,high
+513,Hemesa,20195,1312,high
+505,Raphanis,20360,1262,high
+485,Damaspo,19655,1400,high
+488,Sydone,19235,1230,high
+492,Berito,19405,1220,high
+497,Biblo,19575,1245,high
+494,Eliopoli,19645,1298,high
+489,Cesarea Paneas,19382,1330,high
+2421,Paphos,19488,1152,high
+2426,Salamina,20008,1085,high
+2364,Seleucia Ciliciae,19718,972,high
+2366,Pompeiopolis,19875,980,high
+2368,Mallo,20142,1038,high
+2353,Sidi,19380,1062,high
+2322,Yconio,19300,940,high
+2320,Aquis Calidis Cappadociae,19405,905,high
+499,Tripoli,19705,1245,high
+2374,Antiochia,20550,1090,high
+511,Apamia,20672,1235,high
+2380,Berya,20920,1180,high
+2439,Hierapoli,21338,1278,high
+2438,Bathna,21178,1280,high
+527,Palmyra,20945,1375,high
+2415,Satala,20843,605,high
+2246,Nicopoli,20832,730,high
+2524,Zimara,21312,762,high
+2532,Melentenis,21662,1012,high
+2404,Apsaro,20620,495,high
+2570,Cyrro,21075,1100,high
+2592,Risapa,21380,1392,high
+2593,Sure,21495,1410,high
+2595,Barbalisso,21575,1365,high
+2556,Samosata,22153,1038,high
+2580,Zeugma,21995,1215,high
+2634,Edessa,22487,1032,high
+2621,Ressaina,22473,975,high
+2624,Nisibi,22775,980,high
+2454,Sebastopolis,21990,518,high
+2702,Babylonia,22792,1400,high
+2566,Heracome,21770,1158,medium
+2582,Triganocarten,22305,755,high
+2457,Caspiae,22305,522,medium
+2464,Artaxata,22940,650,high
+2469,Teleda,23330,575,high
+2700,Seleucia,22918,1415,high
+2659,Hatris,23022,1265,high
+2627,Singara,23080,1045,high
+2695,Cesiphun,23605,1232,high
+2516,Ecbatanis Partiorum,23910,1355,high
+2687,Albania,23443,1085,medium
+2501,Isumbo,23062,885,high
+2779,Persepoliscon Mercium Persarum,24365,1418,high
+2763,Alexandria Bucefalos,24628,1052,high
+2728,Nagae,24432,825,medium
+2740,Aris,25162,942,medium
+2724,Hecantopolis,24130,965,high
+2756,Palibotra,24960,1090,high
+2736,Antiochia Margiana,25665,720,high
+2798,Muzeris,25745,1435,high
+2797,Templum Augusti,25692,1398,high
+2742,Aspacora,25458,1010,high
+2796,Tundis,25620,1405,high

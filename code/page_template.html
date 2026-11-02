@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Peutinger Table</title>
+<meta name="description" content="The Peutinger Table, a Roman road map {{source.parchment_m|f1}} m long, set against a modern map: {{located.n|int}} places found on the scroll, {{source.legs|int}} road legs measured, and how far the shape is wrong while the distances are right.">
+<meta property="og:title" content="The Peutinger Table against a modern map">
+<meta property="og:description" content="A Roman road map squeezed into a strip {{source.parchment_m|f1}} m long and {{source.parchment_cm_high|int}} cm high. Its shape is squashed {{shape.stretch_whole|f1}} times, yet its road distances are mostly right.">
+<meta property="og:image" content="https://maps.tristanhotham.com/peutinger/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/peutinger/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+/* Parchment: the scroll's buff ground, the red of its roads, the grey-green of its seas, and gold for the hills. */
+:root{
+  --bg:#F7F2E7; --panel:#EEE6D4; --fg:#22201C; --muted:#68625A; --rule:#E0D6C1; --card:#FFFCF4; --border:#CEC2A8;
+  --red:#B23A2A; --sea:#E9EEEC; --land:#E7DFCB; --road:#C2412D; --ink:#2A3550; --gold:#B07A12; --grey:#7D776D; --blue:#2F5FA7;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15130F; --panel:#1F1C17; --fg:#EEE8DC; --muted:#AAA294; --rule:#332F27; --card:#1A1813; --border:#4A443A;
+  --red:#F07B66; --sea:#14171A; --land:#2A2720; --road:#F07B66; --ink:#B5C1DE; --gold:#E8B54F; --grey:#9A9488; --blue:#7EA7E8; color-scheme:dark; --icofilter:invert(1)}}
+:root[data-theme="dark"]{
+  --bg:#15130F; --panel:#1F1C17; --fg:#EEE8DC; --muted:#AAA294; --rule:#332F27; --card:#1A1813; --border:#4A443A;
+  --red:#F07B66; --sea:#14171A; --land:#2A2720; --road:#F07B66; --ink:#B5C1DE; --gold:#E8B54F; --grey:#9A9488; --blue:#7EA7E8; color-scheme:dark; --icofilter:invert(1)}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:700px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1240px,calc(100vw - 32px));margin-left:calc((100% - min(1240px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--red);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--red);color:#fff;padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(46px,11.5vw,88px)/.9 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 span{color:var(--red)}
+.mark{width:clamp(78px,16vw,128px);height:auto;display:block;color:var(--fg)}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:58ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--red);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--red)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em}
+.stats b.a{color:var(--red)} .stats b.b{color:var(--blue)} .stats b.c{color:#2E8A6E} .stats b.d{color:var(--gold)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:300px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;align-items:center;margin:0 0 10px;flex-wrap:wrap}
+.scrollrow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:2px;max-width:100%}
+.scrollrow .btn{flex:0 0 auto;white-space:nowrap}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px;flex:0 0 auto;align-self:center}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.2)}
+.btn:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.searchbox{position:relative;flex:1 1 260px;min-width:0}
+input[type=search]{font:400 15px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 11px;min-height:40px;width:100%}
+.suggest{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);z-index:1003;font:400 13px/1.3 var(--mono);display:none;max-height:340px;overflow:auto}
+.suggest li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.suggest li span{color:var(--muted)}
+.suggest li[aria-selected="true"],.suggest li:hover{background:var(--panel)}
+.mapcap{font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 0 6px;display:flex;justify-content:space-between;gap:8px;align-items:end;flex-wrap:wrap}
+.mapcap b{color:var(--fg);font-weight:500}
+.lmap{border:1px solid var(--border);background:var(--sea);border-radius:2px;position:relative;overflow:hidden}
+#smap{height:340px;background:var(--panel)}
+#wmap{height:520px}
+@media (max-width:860px){#smap{height:260px}#wmap{height:min(60vh,440px)}}
+.side{background:var(--card);border:1px solid var(--border);padding:12px 14px 10px;font:400 13px/1.5 var(--mono);margin-top:12px;min-height:90px}
+.side .big{font:800 26px/1.1 var(--display);margin:2px 0 4px}
+.side .sub{color:var(--muted);font-size:12px;margin:0 0 8px}
+.side table{border-collapse:collapse;margin:6px 0;width:100%}
+.side td,.side th{padding:3px 10px 3px 0;vertical-align:top;text-align:left}
+.side th{font:500 10.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule)}
+.side td.r,.side th.r{text-align:right;white-space:nowrap}
+.side table.kv{width:auto}
+.side .kv td:first-child{color:var(--muted);white-space:nowrap}
+.side .legs{max-height:220px;overflow:auto;display:block}
+.side .legs tbody tr{cursor:pointer}
+.side .legs tbody tr:hover td{background:var(--panel)}
+.chip{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.ok{color:#2E8A6E}.mid{color:var(--gold)}.bad{color:var(--red)}
+.maplibregl-map{font:400 12px/1.4 var(--mono)}
+.maplibregl-ctrl-attrib{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.maplibregl-ctrl-attrib a{color:var(--fg)}
+.maplibregl-ctrl-group{background:var(--card)}
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon{filter:var(--icofilter,none)}
+.lyrWrap{position:absolute;top:10px;left:10px;z-index:3}
+.lyrBtn{background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;font:600 12px/1 var(--mono);padding:9px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.lyrBtn[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.lyrPanel{background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:260px;box-shadow:0 2px 10px rgba(0,0,0,.15);font:400 12px/1.3 var(--mono);max-height:min(60vh,430px);overflow:auto}
+#smap .lyrPanel{max-height:250px}
+@media (max-width:860px){#smap .lyrPanel{max-height:190px}}
+.lyrPanel[hidden]{display:none}
+.lyrPanel .row{margin:0 0 9px}
+.lyrPanel label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:600}
+.lyrPanel input[type=range]{width:100%;accent-color:var(--fg)}
+.lyrPanel .sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:11px;margin-top:3px}
+.lyrPanel .hd{font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 7px;border-top:1px solid var(--rule);padding-top:9px}
+.lyrPanel .hd:first-child{border-top:0;padding-top:0;margin-top:0}
+.lyrPanel .reset{font:400 11px var(--mono);color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.pinL{font:600 12px/1.1 var(--mono);color:var(--fg);background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--border);padding:3px 6px;border-radius:2px;white-space:nowrap;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 13px var(--mono);color:var(--muted);z-index:1;text-align:center;padding:20px}
+.fallback{position:absolute;inset:0;width:100%;height:100%}
+.fbnote{position:absolute;left:10px;bottom:10px;right:10px;font:400 12px/1.4 var(--mono);color:var(--muted);background:color-mix(in srgb,var(--card) 92%,transparent);padding:6px 9px;border:1px solid var(--border);border-radius:3px;pointer-events:none}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px;align-items:center}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:6px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+.legend i.ln{height:0;border:0;border-top:2px solid;width:18px;border-radius:0}
+.legend i.sq{border-radius:2px;width:14px}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--red);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+table.tbl{width:100%;border-collapse:collapse;font:400 13px/1.4 var(--mono)}
+table.tbl th{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 6px 6px 0;border-bottom:2px solid var(--fg);white-space:nowrap;position:sticky;top:0;background:var(--card)}
+table.tbl td{padding:6px 6px 6px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+table.tbl td.r,table.tbl th.r{text-align:right;white-space:nowrap}
+table.tbl tr[data-k]{cursor:pointer}
+table.tbl tr[data-k]:hover td{background:var(--panel)}
+.tablebox{overflow:auto;border:1px solid var(--border);background:var(--card);padding:0 10px}
+details{margin:14px 0}
+summary{font:500 13px/1.4 var(--mono);cursor:pointer;color:var(--fg);padding:8px 0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--red);border-color:var(--red);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+[hidden]{display:none!important}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>History</span><span>A Roman road map</span></div>
+<header class="hero">
+  <h1>Peutinger <span>Table</span></h1>
+  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">A Roman map of the roads from Britain to India, squeezed onto a strip of parchment {{source.parchment_m|f1}} metres long and {{source.parchment_cm_high|int}} centimetres high. I found {{located.n|int}} of its places by eye, set the scroll beside a modern map, and measured {{dist.n_gc|int}} of its road legs. The shape is wildly wrong. The distances, mostly, are right.</p>
+</header>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Sources: OmnesViae and Talbert's Tabula Peutingeriana; Konrad Miller's facsimile (1887); Itiner-e; Pleiades; Natural Earth</div>
+
+<div class="stats">
+  <div><b class="a">{{shape.stretch_whole|f1}}×</b><span>more squashed north to south than east to west, across the whole scroll</span></div>
+  <div><b class="b">{{dist.road_within25_pct|int}}%</b><span>of the {{dist.n_road|int}} legs I could follow along a Roman road agree with the scroll to within 25%</span></div>
+  <div><b class="c">{{total.km|int}}</b><span>km of road with a distance written beside it on the surviving scroll</span></div>
+  <div><b class="d">{{rome.frac|int}}%</b><span>of the way along the scroll is Rome; {{rome.frac_k_lost|int}}% if {{rome.lost_for_centre_int|int}} sheets are lost</span></div>
+</div>
+
+<p class="lede">In Vienna, in the Austrian National Library, lies a medieval copy of a Roman map. It is made of eleven sheets of parchment glued end to end into a strip about {{source.parchment_m|f1}} metres long and only {{source.parchment_cm_high|int}} centimetres high. On it the whole Roman world, from the Rhine mouth to Sri Lanka, is pressed flat like a flower in a book. Seas become thin ribbons. Italy lies on its side. Rivers run along the strip instead of across it. Yet the map is covered in roads, drawn as red lines with a little kink at every stopping place, and beside each stretch a number: how far to the next station.</p>
+<p>The first sheet, which showed Spain and most of Britain, was lost long ago. What survives is known as the Peutinger Table, the Tabula Peutingeriana, after Konrad Peutinger, the Augsburg scholar who owned it in the sixteenth century. Richard Talbert's modern edition identifies its places, and the OmnesViae project by René Voorburg turns it into a dataset of {{source.tp|int}} stations and {{source.legs_surv|int}} legs on the surviving sheets, with the lost western end rebuilt from another Roman road book. I used that dataset, found {{located.n|int}} of the places by eye on Konrad Miller's 1887 facsimile, and set the scroll above a modern map. Click a place on either map to see it on the other.</p>
+
+<h2><span class="n">01 · Two maps</span>The scroll and the real world</h2>
+<div class="bleed" id="atlas">
+<div class="controls"><div class="scrollrow" id="regRow"><span class="ctl-l">Show</span></div></div>
+<div class="controls">
+  <div class="searchbox"><input type="search" id="q" placeholder="Search a station (Roma, Londinio, Antiochia, Aquileia...)" aria-label="Search a station" autocomplete="off"><ul class="suggest" id="sug" role="listbox"></ul></div>
+</div>
+<div class="controls"><div class="scrollrow" id="focusRow"><span class="ctl-l">Go to</span></div></div>
+<div class="mapcap"><span><b>The Peutinger Table</b> · Miller's facsimile, segments II to XII</span><span id="segName">drag along the scroll</span></div>
+<div id="smap" class="lmap" data-fullscreen-map role="application" aria-label="The Peutinger Table, zoomable, with the places I located marked"><div class="loading">Loading the scroll...</div></div>
+<div class="mapcap"><span><b>The same roads today</b> · north at the top</span><span>Natural Earth</span></div>
+<div id="wmap" class="lmap" data-fullscreen-map role="application" aria-label="Modern map of the stations and roads of the Peutinger Table"><div class="loading">Loading the modern map...</div></div>
+<div class="legend" id="legend"></div>
+<div class="side" id="side" aria-live="polite"></div>
+<p class="src">Top: Konrad Miller's 1887 hand-drawn facsimile of the Tabula (public domain). Dots: the {{located.n|int}} places I located by eye, coloured by region. In Map layers you can bend the modern coastline onto the scroll, show the parchment joins, and keep the modern map following the scroll as you drag. Bottom: the {{source.tp_coords|int}} surviving stations and {{source.ov_coords|int}} reconstructed ones that OmnesViae places, and the Tabula's legs, coloured by how well the written distance matches the road (Map layers). Sources: OmnesViae (René Voorburg) after Talbert (2010); Itiner-e (CC BY 4.0); DARE provinces (CC BY-SA); Natural Earth.</p>
+</div>
+
+<h2><span class="n">02 · Distances</span>Wrong shape, right numbers</h2>
+<p>The numbers on the Tabula are not labelled with a unit, and the OmnesViae dataset stores them as plain numbers. Scholars read most of them as Roman miles of about {{units.rm_km|f2}} km, and those in Gaul as Gallic leagues of one and a half miles. The map itself drops a hint: beside Lyon it says "Lugduno caput Galliarum usque hic legas", Lyon, capital of the Gauls, leagues up to here.</p>
+<p>The measurements back this up. For the {{units.Mile.n|int}} measurable legs outside Gaul, each unit on the map covers a median {{units.Mile.km_per_unit_gc|f2}} km as the crow flies and {{units.Mile.km_per_unit_road|f2}} km along the Roman road network mapped by the Itiner-e project. In Aquitania, Lugdunensis and Belgica, the three Gallic provinces beyond Narbonensis, and in the two Germanies, the same unit covers {{units.League.km_per_unit_gc|f2}} km as the crow flies, {{units.league_over_mile|f2}} times as much: very close to the one and a half of a league. In Narbonensis, the old Roman province on the Mediterranean, the figure falls straight back to {{units.narbonensis.km_per_unit_gc|f2}}. Read as miles, Gaul's roads would come out {{units.gaul_as_miles_err|f2}} times longer than the figures say; read as leagues, the ratio is {{units.gaul_as_leagues_err|f2}}, right to within a few per cent.</p>
+<div class="figure"><p class="fig-h">How many kilometres one unit on the map covers, province by province</p><p class="fig-sub">Median great-circle distance per unit written on the map, for provinces with at least 25 measured legs. Hover a dot.</p><div class="chart" id="unitChart"></div><div class="legend" id="unitLegend"></div></div>
+<p>Converted that way, the Tabula's distances hold up. Across the {{dist.n_road|int}} legs where both stations sit on a mapped Roman road, the median road distance is {{dist.road_long_pct|int}}% longer than the figure on the map, and the median straight line {{dist.gc_short_pct|int}}% shorter, so the written figures sit just where a road distance should. {{dist.road_within25_pct|int}}% of legs agree with the road to within 25%, and {{dist.road_within50_pct|int}}% to within 50%. The misses are the familiar faults of a copy of a copy: a numeral dropped or doubled, a station skipped, a road joined to the wrong town.</p>
+<div class="figure"><p class="fig-h">Each leg: the distance on the map against the distance along the road</p><p class="fig-sub">{{dist.n_road|int}} surviving legs with a figure and a road distance (log scales). The diagonal is perfect agreement; the band is 25% either way. Hover or tap a dot.</p><div class="chart" id="distChart"></div><div class="legend" id="distLegend"></div></div>
+<p>Over long journeys the errors cancel. Adding up the Tabula's own figures from Rome, the road to Cologne comes to {{routes.Cologne.km|int}} km, against {{routes.Cologne.road_km|int}} km along the mapped Roman roads; to Vienna {{routes.Vienna.km|int}} against {{routes.Vienna.road_km|int}}; to Constantinople {{routes.Constantinople.km|int}} against {{routes.Constantinople.road_km|int}}. The farther east, the more the Tabula's totals run short of the mapped roads: by about an eighth on the way to Antioch ({{routes.Antioch.km|int}} against {{routes.Antioch.road_km|int}}) and Jerusalem ({{routes.Jerusalem.km|int}} against {{routes.Jerusalem.road_km|int}}).</p>
+<p>The far east is different. In Persia and India, where the map goes beyond anything Rome governed, only {{units.Far east.n|int}} legs can be measured, and one unit stands for anything from {{units.far_east_min|f1}} to {{units.far_east_max|f1}} km. Some look like Roman miles, some like Persian parasangs of five or six kilometres, and the Indian ones fit nothing. The map's makers were copying figures they could not check.</p>
+
+<h2><span class="n">03 · The squeeze</span>A world pressed flat</h2>
+<p>The places I located run from {{shape.west|raw}} (Brest) in the west to {{shape.east|raw}} (Patna) in the east, about {{shape.ew_km|int}} km, and from {{shape.north|raw}} on the Rhine mouth to {{shape.south|raw}} in south India, about {{shape.ns_km|int}} km. The real world they cover is {{shape.real_ratio|f1}} times as wide as it is tall. The scroll is {{shape.scroll_ratio|f1}} times as wide as it is tall. So one centimetre of parchment stands, on average, for {{shape.km_per_cm_ew|f1}} km east to west but {{shape.km_per_cm_ns|f1}} km north to south: the world is squashed about {{shape.stretch_whole|f1}} times more in one direction than the other.</p>
+<p>Still, the order is kept. West to east along the scroll follows west to east on the ground almost perfectly: the rank correlation between a place's longitude and its position along the scroll is {{shape.x_spearman_lon|f2}}. North to south is much looser ({{shape.y_spearman_lat|f2}} for latitude against height on the scroll), because whole regions are turned on their sides to fit. Italy runs along the scroll from its north-west to its south-east, and so does North Africa, laid out beneath it like a second long peninsula.</p>
+<div class="figure"><p class="fig-h">How stretched each region is drawn</p><p class="fig-sub">For each region, the best straight-line fit from ground to scroll: how many times more parchment a kilometre gets in the most-stretched direction than in the least. Regions with at least 8 located places. Hover a bar for the direction the scroll runs along.</p><div class="chart" id="stretchChart"></div></div>
+<p>Region by region, the squeeze varies. North Africa is the most stretched ({{regions.North Africa.aniso|int}} times), a long ribbon of coast with almost no depth; the Danube lands come next ({{regions.Alps and Danube.aniso|int}} times), then Egypt, Greece and Italy. Asia Minor ({{regions.Asia Minor.aniso|f1}}) and the Levant ({{regions.Levant.aniso|f1}}) keep more of their shape, and Mesopotamia ({{regions.Mesopotamia and Armenia.aniso|f1}}) and Persia and India ({{regions.Persia, Central Asia and India.aniso|f1}}) least of all, but only because there the map hardly tries: the far east gets a couple of sheets of loosely placed names.</p>
+<p>Turn on "Modern coastline, bent to fit" in the scroll's Map layers to see this. I fitted a smooth surface through the {{located.n|int}} located places and used it to bend Natural Earth's coastline onto the scroll. The real Adriatic and Tyrrhenian coasts of Italy land almost exactly on the Tabula's grey-green seas.</p>
+
+<h2><span class="n">04 · Space</span>Who gets the parchment</h2>
+<p>Giving each part of the scroll to its nearest located place, Italy and its islands take {{regions.Italy and islands.scroll_pct|f1}}% of the surviving parchment, though they are only {{regions.Italy and islands.land_pct|f1}}% of the land of the empire's provinces: {{regions.Italy and islands.space_ratio|f1}} times their share. Mesopotamia and Armenia get {{regions.Mesopotamia and Armenia.space_ratio|f1}} times theirs, Greece and Thrace {{regions.Greece and Thrace.space_ratio|f1}}, the Levant {{regions.Levant.space_ratio|f1}}. Gaul ({{regions.Gaul and the Rhine.space_ratio|f2}}), North Africa ({{regions.North Africa.space_ratio|f2}}) and Asia Minor ({{regions.Asia Minor.space_ratio|f2}}) get about their fair share. Egypt gets far less ({{regions.Egypt and Cyrene.space_ratio|f2}}), but most of its province is empty desert, and the Tabula, like the Romans, cared about the Nile valley.</p>
+<div class="figure"><p class="fig-h">Share of the scroll against share of the land</p><p class="fig-sub">Share of the surviving scroll nearest to each region's located places, against the region's share of the land of the provinces of about AD 117 (DARE) and its share of the Tabula's stations. Hover a bar.</p><div class="chart" id="spaceChart"></div><div class="legend" id="spaceLegend"></div></div>
+<p>Britain and Spain barely appear: the sheet that held them is lost, leaving only a corner of Kent and a sliver of Gaul's Atlantic coast. OmnesViae rebuilds that missing end from the Antonine Itinerary, another Roman road book, adding {{recon.stations|int}} stations and {{recon.legs|int}} legs. I keep those separate throughout. Their distances behave just like the Tabula's (median straight line {{recon.gc_median|f2}} of the written figure), as you would expect from a list of the same roads.</p>
+
+<h2><span class="n">05 · Rome</span>The middle of the world?</h2>
+<p>Rome sits enthroned in a gold circle, one of only three cities drawn as a person, with Constantinople and Antioch. {{rome.degree|int}} roads leave it. But on the surviving scroll it is not in the middle: it lies {{rome.frac|f1}}% of the way from the left edge, in Miller's segment {{rome.seg|raw}}. The middle of the surviving scroll falls in the Balkans, near {{rome.middle_modern|raw}}. Add back one lost sheet of average width at the western end, and Rome moves to {{rome.frac_one_lost|f1}}%. It would sit at the exact centre only if about {{rome.lost_for_centre|f1}} sheets were lost; with {{rome.lost_for_centre_int|int}}, it lands at {{rome.frac_k_lost|f1}}%. Some scholars, Richard Talbert among them, argue that the map was designed with Rome at its centre. If so, the measurements show how much is missing: about three sheets, not one.</p>
+<div class="figure"><p class="fig-h">Where Rome falls along the scroll</p><p class="fig-sub">The eleven surviving sheets to scale, with Rome marked, and the sheets that would be needed at the western end to put Rome in the middle. Choose how many are lost.</p><div class="controls" id="lostRow"><span class="ctl-l">Lost sheets</span></div><div class="chart" id="romeChart"></div></div>
+
+<h2><span class="n">06 · The whole road</span>{{total.km_rounded_k|int}},000 kilometres</h2>
+<p>Adding up every figure on the surviving sheets gives {{total.units|int}} units over {{total.legs|int}} legs: {{total.rm_mile_zone|int}} Roman miles, {{total.leagues|int}} Gallic leagues, and {{total.far_units|int}} units of unknown length in the far east. Converted, that is about {{total.km|int}} km of road, roughly {{total.pct_of_itinere|int}}% of the {{total.network_km|int}} km of Roman roads that Itiner-e has mapped. Another {{total.nodist_legs|int}} legs on the surviving scroll have no figure at all, and the lost west would add about {{recon.stated_km|int}} km more.</p>
+<p>Walking all of it, at the 20 to 25 km a day that Wikipedia gives for a traveller on foot, would take about {{total.days.foot|int}} days, close to {{total.years_foot|int}} years. A courier riding the imperial relay of horses, about 80 km a day, would need {{total.days.courier|int}} days.</p>
+<div class="figure"><p class="fig-h">Days from Rome, by the Tabula's own figures</p><p class="fig-sub">Shortest route over the Tabula's legs, adding up the written distances (a few legs without a figure are filled in, see methods). No sea crossings: the Tabula draws none. Choose a way of travelling.</p><div class="controls" id="modeRow"><span class="ctl-l">Travel</span></div><div class="chart" id="daysChart"></div></div>
+<p>The Tabula draws no sea routes, so its traveller goes the long way round. Rome to Carthage, a few days by ship, is {{routes.Carthage.km|int}} km by the map's roads, through the Balkans, Asia Minor, Syria and Egypt and along the whole of the African coast: {{routes.Carthage.foot|int}} days on foot.</p>
+<div class="figure"><p class="fig-h">The regions, in numbers</p><p class="fig-sub">Located places, share of the scroll and of the land, stretch, and kilometres of road written on the surviving scroll. Click a row to see the region on both maps.</p><div class="tablebox"><table class="tbl" id="regTable"></table></div></div>
+
+<h2><span class="n">07 · How I did this</span>Methods and caveats</h2>
+<p><b>The data.</b> OmnesViae's export of the Tabula: {{source.places|int}} stations (one listed twice) and {{source.legs|int}} legs, with the name as written on the map, Talbert's identification and coordinates. I used its coordinates as given. Checking them against the Pleiades gazetteer of ancient places, {{source.pleiades_10km_pct|int}}% of the {{source.pleiades_checked|int}} stations whose name matches a Pleiades place lie within 10 km of it. East of the Euphrates many identifications are uncertain.</p>
+<p><b>Places on the scroll.</b> There is no table of where each station sits on the Tabula, so I found {{located.n|int}} by eye on Miller's facsimile, reading the labels at full resolution and marking the town's picture or the start of its label: {{located.high|int}} read clearly and {{located.medium|int}} with some doubt. They cover every sheet, at least {{located.min_per_segment|int}} per sheet, but favour legible and well-known places.</p>
+<p><b>Units and distances.</b> A leg's figure is converted at {{units.rm_km|f2}} km per Roman mile, or {{units.league_km|f2}} km per league in Aquitania, Lugdunensis, Belgica and the two Germanies. Straight-line distances are great circles between OmnesViae's coordinates. Road distances follow the Itiner-e network of Roman roads (from my earlier roman-roads study): each station is placed on the nearest road within {{dist.snap_km|int}} km, and the shortest route between the two is kept when it is no more than twice the straight line plus 10 km. That gave {{dist.n_road|int}} legs. Itiner-e's roads are digitised with their bends, and the route between two stations can take a detour where the network has a gap, so the road figures lean long.</p>
+<p><b>Shape and space.</b> Stretch is the ratio of the two scale factors of a straight-line (affine) fit from ground to scroll, region by region; the fits are rough, since nothing on this map is straight. Share of the scroll gives each pixel of the painted strip to the region of its nearest located place, so it depends on where I located places. Land shares use the provinces of about AD 117 from the Digital Atlas of the Roman Empire, and are not defined beyond the frontier. Sizes in centimetres assume the surviving parchment is {{source.parchment_m|f2}} m long, the length usually quoted.</p>
+<p><b>Journeys.</b> Shortest routes over all legs, weighted by the written distance; {{network.legs_filled|int}} legs with no figure are weighted by the road distance, the straight line times {{network.road_gc|f2}}, or a typical leg of {{network.median_leg_km|f1}} km. Days use Wikipedia's speeds: 22.5 km a day on foot, 45 by cart, 80 by courier relay.</p>
+<details><summary>Sources and licences</summary>
+<ul>
+<li>OmnesViae: Roman routeplanner, by René Voorburg (omnesviae.org), JSON-LD export of the Tabula Peutingeriana, built on Talbert, R. J. A. (2010) Rome's World: the Peutinger Map Reconsidered (Cambridge University Press) and Pleiades. No licence is stated; used as factual data, with credit.</li>
+<li>Miller, K. (1887) Castori Romanorum cosmographi tabula quae dicitur Peutingeriana. Facsimile, Wikimedia Commons, "TabulaPeutingeriana.jpg", public domain.</li>
+<li>Itiner-e, the digital atlas of ancient roads (de Soto, Pazout, Brughmans and others, 2025), CC BY 4.0, via my roman-roads study.</li>
+<li>Digital Atlas of the Roman Empire (DARE, Johan Åhlfeldt), province outlines, CC BY-SA.</li>
+<li>Pleiades: a gazetteer of past places, version {{source.pleiades_version|raw}}, CC BY 3.0.</li>
+<li>English Wikipedia, "Roman roads", for travel speeds, CC BY-SA 4.0. Natural Earth (public domain). Optional relief tiles © Esri.</li>
+</ul></details>
+
+<div class="cta"><a class="p" href="https://doi.org/10.5281/zenodo.23882605">Read the paper</a><a href="https://github.com/Tristan-Hotham/peutinger">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/31/peutinger/">Blog post</a></div>
+
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) The Peutinger Table against a modern map: a Roman road map's shape, space and distances. Zenodo. <a href="https://doi.org/10.5281/zenodo.23882605">https://doi.org/10.5281/zenodo.23882605</a></p>
+<p>Licence: code MIT; text, figures and derived data CC BY 4.0. The facsimile is public domain; OmnesViae data credited to René Voorburg and Richard Talbert; Itiner-e CC BY 4.0; DARE CC BY-SA; Pleiades CC BY 3.0.</p>
+<p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const R = /*RESULTS*/;
+const SITE = /*SITE*/;
+const WORLD = /*WORLD*/;
+const fmt = n => n == null || n === "" ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+document.addEventListener("click", e => { if (!e.target.closest("svg")) hideTip(); });
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const redraws = [];
+function resp(box, render) { let last = 0; const go = force => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const small = () => innerWidth < 860;
+const RN = SITE.regions.map(r => r[0]), RC = SITE.regions.map(r => r[1]);
+const LC = {}; SITE.loc_cols.forEach((k, i) => LC[k] = i);
+const SC = {}; SITE.st_cols.forEach((k, i) => SC[k] = i);
+const LOC = SITE.located, ST = SITE.stations, F = SITE.fit;
+const locById = {}; LOC.forEach((r, i) => locById[r[LC.id]] = i);
+const stById = {}; ST.forEach((r, i) => stById[r[SC.id]] = i);
+const SHORT = { "Mesopotamia and Armenia": "Mesopotamia", "Persia, Central Asia and India": "Persia and India", "Gaul and the Rhine": "Gaul and Rhine", "Galatia et Cappadocia": "Galatia et Capp.", "Africa Proconsularis": "Africa Procons.", "Armenia Mesopotamia": "Armenia Mesop.", "Bithynia et Pontus": "Bithynia Pontus", "Pannonia Superior": "Pannonia Sup.", "Pannonia Inferior": "Pannonia Inf.", "Germania Superior": "Germania Sup.", "Germania Inferior": "Germania Inf.", "Moesia Superior": "Moesia Sup.", "Moesia Inferior": "Moesia Inf." };
+const sh = (t, sm_) => sm_ ? (SHORT[t] || t) : t;
+const nameOf = id => SITE.names[id] || (stById[id] != null && ST[stById[id]][SC.label] ? ST[stById[id]][SC.label] : "unnamed station");
+
+/* hero mark: a scroll with a red road and three stations */
+(function () {
+  const g = document.getElementById("heroMark");
+  el("rect", { x: 6, y: 42, width: 108, height: 36, rx: 3, fill: "none", stroke: "currentColor", "stroke-width": 3 }, g);
+  el("rect", { x: 6, y: 48, width: 108, height: 6, fill: "#7D9A97", opacity: .7 }, g);
+  el("rect", { x: 6, y: 66, width: 108, height: 6, fill: "#7D9A97", opacity: .7 }, g);
+  el("path", { d: "M12 61 L32 61 L36 58 L58 58 L62 62 L86 62 L90 59 L108 59", stroke: "#B23A2A", "stroke-width": 3, fill: "none" }, g);
+  el("circle", { cx: 60, cy: 60, r: 6, fill: "#B07A12", stroke: "currentColor", "stroke-width": 1.5 }, g);
+  el("rect", { x: 30, y: 52, width: 7, height: 6, fill: "#B07A12" }, g);
+  el("rect", { x: 84, y: 53, width: 7, height: 6, fill: "#B07A12" }, g);
+})();
+
+/* ---------- state ---------- */
+const S = { reg: new Set(RN.map((_, i) => i)), sel: null };
+let FB = null;
+const LYDEF = { sdots: true, joins: true, warp: false, warpK: 80, follow: true, stations: true, recon: true, legs: true, legcol: true, mjoins: false, prov: false, relief: false, reliefK: 35 };
+const LY = { ...LYDEF };
+try { Object.assign(LY, JSON.parse(localStorage.getItem("pt_layers") || "{}")); } catch (e) {}
+const saveLY = () => { try { localStorage.setItem("pt_layers", JSON.stringify(LY)); } catch (e) {} };
+
+/* facsimile pixel -> pseudo coordinates (tiles laid on Web Mercator at zoom 7, one image pixel per world pixel) */
+const px2ll = (x, y) => { const X = F.x0 + (x - F.crop[0]), Y = F.y0 + (y - F.crop[1]); const lon = X / F.world7 * 360 - 180; const n = Math.PI - 2 * Math.PI * Y / F.world7; return [lon, 180 / Math.PI * Math.atan(Math.sinh(n))]; };
+const ll2px = (lon, lat) => { const X = (lon + 180) / 360 * F.world7; const s = Math.sin(lat * Math.PI / 180); const Y = (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * F.world7; return [X - F.x0 + F.crop[0], Y - F.y0 + F.crop[1]]; };
+const SB = [px2ll(F.crop[0], F.crop[3]), px2ll(F.crop[2], F.crop[1])];
+const MAPB = [px2ll(F.map_x[0], F.map_y[1]), px2ll(F.map_x[1], F.map_y[0])];
+
+function pal() { const d = isDark(); return { sea: css("--sea"), land: css("--land"), border: d ? "#3A3830" : "#FFFFFF", ink: css("--fg"), panel: css("--panel"), halo: d ? "#15130F" : "#FFFCF4" }; }
+const regShown = c => S.reg.has(c);
+const colExpr = () => ["match", ["get", "c"], ...RC.flatMap((c, i) => [i, c]), "#888"];
+function locFeatures(geo) {
+  return { type: "FeatureCollection", features: LOC.map((r, i) => ({ type: "Feature", id: i, properties: { i, k: r[LC.id], c: r[LC.reg], on: regShown(r[LC.reg]) ? 1 : 0, conf: r[LC.conf] === "high" ? 1 : 0, n: r[LC.label] },
+    geometry: { type: "Point", coordinates: geo ? [r[LC.lon], r[LC.lat]] : px2ll(r[LC.x], r[LC.y]) } })) };
+}
+function stFeatures() { return { type: "FeatureCollection", features: ST.filter(r => !r[SC.loc]).map((r, i) => ({ type: "Feature", properties: { k: r[SC.id], c: r[SC.reg], on: regShown(r[SC.reg]) ? 1 : 0, rec: r[SC.recon] }, geometry: { type: "Point", coordinates: [r[SC.lon], r[SC.lat]] } })) }; }
+function legFeatures() { return { type: "FeatureCollection", features: SITE.leg_lines.map(l => ({ type: "Feature", properties: { rec: l[4], q: l[5] }, geometry: { type: "LineString", coordinates: [[l[0], l[1]], [l[2], l[3]]] } })) }; }
+function segFeatures() {
+  const f = [];
+  SITE.segments.forEach((s, i) => { if (i) f.push({ type: "Feature", properties: { t: "line" }, geometry: { type: "LineString", coordinates: [px2ll(s.x0, F.crop[1] + 20), px2ll(s.x0, F.crop[3] - 20)] } });
+    f.push({ type: "Feature", properties: { t: "lab", n: "Sheet " + s.seg }, geometry: { type: "Point", coordinates: px2ll((s.x0 + s.x1) / 2, F.map_y[0] - 55) } }); });
+  return { type: "FeatureCollection", features: f };
+}
+function warpFeatures() { return { type: "FeatureCollection", features: SITE.warp.map(l => ({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: l.map(p => px2ll(p[0], p[1])) } })) }; }
+const legColour = () => { const d = isDark(); return ["match", ["get", "q"], 0, d ? "#5CC49F" : "#2E8A6E", 1, d ? "#E8B54F" : "#B07A12", 2, d ? "#F07B66" : "#B23A2A", d ? "#8E887C" : "#9A9284"]; };
+
+/* ---------- the two maps ---------- */
+let sm = null, wm = null, sReady = false, wReady = false, pins = [], following = false;
+function startMaps() {
+  if (typeof maplibregl === "undefined") { fallback(); return; }
+  const P = pal();
+  try {
+    const sh = document.getElementById("smap").clientHeight, z0 = 7 + Math.log2(sh / (F.map_y[1] - F.map_y[0] + 60));
+    sm = new maplibregl.Map({ container: "smap", center: px2ll(SITE.rome[0], (F.map_y[0] + F.map_y[1]) / 2), zoom: z0, maxBounds: [[SB[0][0] - 25, -60], [SB[1][0] + 25, 60]],
+      minZoom: 1, maxZoom: 8.6, renderWorldCopies: false, attributionControl: { compact: true, customAttribution: "Facsimile: K. Miller 1887 (public domain)" }, dragRotate: false, pitchWithRotate: false, fadeDuration: 0,
+      style: { version: 8, sources: {
+        tab: { type: "raster", tiles: [new URL("tiles/{z}/{x}/{y}.jpg", location.href).href.replace(/%7B/g, "{").replace(/%7D/g, "}")], tileSize: 256, minzoom: 0, maxzoom: F.maxzoom, bounds: [SB[0][0], SB[0][1], SB[1][0], SB[1][1]] },
+        pts: { type: "geojson", data: locFeatures(false) }, seg: { type: "geojson", data: segFeatures() }, warp: { type: "geojson", data: warpFeatures() },
+        sel: { type: "geojson", data: { type: "FeatureCollection", features: [] } } },
+        layers: [{ id: "bg", type: "background", paint: { "background-color": P.panel } },
+          { id: "tab", type: "raster", source: "tab", paint: { "raster-fade-duration": 0 } },
+          { id: "segl", type: "line", source: "seg", filter: ["==", ["get", "t"], "line"], paint: { "line-color": "#22201C", "line-width": 1.6, "line-dasharray": [3, 2], "line-opacity": .75 } },
+          { id: "warp", type: "line", source: "warp", layout: { visibility: "none", "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#2F5FA7", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.2, 7, 3], "line-opacity": LY.warpK / 100 } },
+          { id: "pts", type: "circle", source: "pts", filter: ["==", ["get", "on"], 1], paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 2, 2.6, 5, 5, 8, 9], "circle-color": colExpr(), "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.2, "circle-opacity": .92 } },
+          { id: "sel", type: "circle", source: "sel", paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 2, 8, 7, 16], "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#B23A2A", "circle-stroke-width": 3 } }] } });
+    sm.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+    sm.on("error", e => console.warn("scroll", e && e.error && e.error.message));
+    sm.on("load", () => { sReady = true; document.querySelector("#smap .loading")?.remove(); applyLayers(); bindClicks(sm, "pts"); drawSel(); segLabel(); if (LY.follow && wReady) followScroll(); });
+    sm.on("moveend", () => { segLabel(); if (LY.follow && !following && wReady) followScroll(); following = false; });
+    wm = new maplibregl.Map({ container: "wmap", center: small() ? [22, 38] : [24, 39], zoom: small() ? 1.6 : 2.55, minZoom: 1, maxZoom: 10, renderWorldCopies: false, attributionControl: { compact: true }, dragRotate: false, pitchWithRotate: false, fadeDuration: 0,
+      style: { version: 8, sources: {
+        world: { type: "geojson", data: WORLD, attribution: "Natural Earth" },
+        relief: { type: "raster", tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}"], tileSize: 256, maxzoom: 13, attribution: "Relief: Esri" },
+        prov: { type: "geojson", data: "data/provinces.json", attribution: "DARE (CC BY-SA)" },
+        legs: { type: "geojson", data: legFeatures(), attribution: "OmnesViae, Talbert" }, st: { type: "geojson", data: stFeatures() }, pts: { type: "geojson", data: locFeatures(true) },
+        joins: { type: "geojson", data: SITE.joins }, sel: { type: "geojson", data: { type: "FeatureCollection", features: [] } } },
+        layers: [{ id: "bg", type: "background", paint: { "background-color": P.sea } },
+          { id: "land", type: "fill", source: "world", paint: { "fill-color": P.land } },
+          { id: "relief", type: "raster", source: "relief", layout: { visibility: "none" }, paint: { "raster-opacity": LY.reliefK / 100 } },
+          { id: "borders", type: "line", source: "world", paint: { "line-color": P.border, "line-width": .6 } },
+          { id: "prov", type: "line", source: "prov", layout: { visibility: "none" }, paint: { "line-color": isDark() ? "#8E887C" : "#9A9284", "line-width": .9, "line-dasharray": [2, 2] } },
+          { id: "legs", type: "line", source: "legs", layout: { "line-cap": "round" }, paint: { "line-color": legColour(), "line-width": ["interpolate", ["linear"], ["zoom"], 2, .7, 7, 2.4], "line-opacity": ["case", ["==", ["get", "rec"], 1], .55, .85] } },
+          { id: "joins", type: "line", source: "joins", layout: { visibility: "none" }, paint: { "line-color": isDark() ? "#EEE8DC" : "#22201C", "line-width": 1.5, "line-dasharray": [3, 2] } },
+          { id: "st", type: "circle", source: "st", filter: ["==", ["get", "on"], 1], paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 2, 1.4, 7, 4], "circle-color": ["case", ["==", ["get", "rec"], 1], "rgba(0,0,0,0)", colExpr()], "circle-stroke-color": colExpr(), "circle-stroke-width": ["case", ["==", ["get", "rec"], 1], 1, 0], "circle-opacity": .75 } },
+          { id: "pts", type: "circle", source: "pts", filter: ["==", ["get", "on"], 1], paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 2, 3.2, 7, 8], "circle-color": colExpr(), "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 1.2 } },
+          { id: "sel", type: "circle", source: "sel", paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 2, 9, 7, 16], "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#B23A2A", "circle-stroke-width": 3 } }] } });
+    wm.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+    wm.on("error", () => { /* offline tiles or provinces file: the plain base map still works */ });
+    wm.on("load", () => { wReady = true; document.querySelector("#wmap .loading")?.remove(); applyLayers(); bindClicks(wm, "pts"); bindClicks(wm, "st"); drawSel(); if (LY.follow && sReady) followScroll(); });
+    layersControl();
+  } catch (e) { console.warn(e); fallback(); }
+}
+function segLabel() { if (!sReady) return; const c = sm.getCenter(); const x = ll2px(c.lng, c.lat)[0]; const s = SITE.segments.find(s => x >= s.x0 && x < s.x1); document.getElementById("segName").textContent = s ? "sheet " + s.seg + " of the surviving eleven" : "the margin"; }
+function followScroll() {
+  const b = sm.getBounds(); const p0 = ll2px(b.getWest(), b.getNorth()), p1 = ll2px(b.getEast(), b.getSouth());
+  const vis = LOC.filter(r => r[LC.x] >= p0[0] && r[LC.x] <= p1[0] && r[LC.y] >= p0[1] - 40 && r[LC.y] <= p1[1] + 40);
+  if (vis.length < 2 || vis.length > 200) return;
+  const lo = vis.map(r => r[LC.lon]).sort((a, b) => a - b), la = vis.map(r => r[LC.lat]).sort((a, b) => a - b);
+  const q = (a, f) => a[Math.min(a.length - 1, Math.max(0, Math.round(f * (a.length - 1))))];
+  wm.fitBounds([[q(lo, .05) - .6, q(la, .05) - .6], [q(lo, .95) + .6, q(la, .95) + .6]], { padding: 30, duration: 700, maxZoom: 7 });
+}
+function bindClicks(map, layer) {
+  map.on("click", layer, e => { const f = e.features[0]; if (!f) return; select(f.properties.k, false); });
+  map.on("mouseenter", layer, () => map.getCanvas().style.cursor = "pointer");
+  map.on("mouseleave", layer, () => map.getCanvas().style.cursor = "");
+}
+function closeAttrib() { document.querySelectorAll(".maplibregl-ctrl-attrib.maplibregl-compact").forEach(a => { a.classList.remove("maplibregl-compact-show"); a.removeAttribute("open"); }); }
+function applyLayers() {
+  closeAttrib();
+  if (sReady) { sm.setLayoutProperty("pts", "visibility", LY.sdots ? "visible" : "none"); sm.setLayoutProperty("segl", "visibility", LY.joins ? "visible" : "none");
+    sm.setLayoutProperty("warp", "visibility", LY.warp ? "visible" : "none"); sm.setPaintProperty("warp", "line-opacity", LY.warpK / 100); }
+  if (wReady) { wm.setLayoutProperty("st", "visibility", LY.stations ? "visible" : "none"); wm.setLayoutProperty("legs", "visibility", LY.legs ? "visible" : "none");
+    wm.setFilter("legs", LY.recon ? null : ["==", ["get", "rec"], 0]); wm.setFilter("st", LY.recon ? ["==", ["get", "on"], 1] : ["all", ["==", ["get", "on"], 1], ["==", ["get", "rec"], 0]]);
+    wm.setPaintProperty("legs", "line-color", LY.legcol ? legColour() : (isDark() ? "#F07B66" : "#C2412D"));
+    wm.setLayoutProperty("joins", "visibility", LY.mjoins ? "visible" : "none"); wm.setLayoutProperty("prov", "visibility", LY.prov ? "visible" : "none");
+    wm.setLayoutProperty("relief", "visibility", LY.relief ? "visible" : "none"); wm.setPaintProperty("relief", "raster-opacity", LY.reliefK / 100); }
+  legend();
+}
+function refreshData() {
+  if (sReady) sm.getSource("pts").setData(locFeatures(false));
+  if (wReady) { wm.getSource("pts").setData(locFeatures(true)); wm.getSource("st").setData(stFeatures()); applyLayers(); }
+  if (FB) FB.draw();
+}
+function layersControl() {
+  const mk = (box, html) => { const w = document.createElement("div"); w.className = "lyrWrap";
+    w.innerHTML = `<button class="lyrBtn" aria-expanded="false">Map layers</button><div class="lyrPanel" hidden>${html}<button class="reset">Reset layers</button></div>`;
+    document.getElementById(box).appendChild(w);
+    const b = w.querySelector(".lyrBtn"), p = w.querySelector(".lyrPanel");
+    ["click", "dblclick", "mousedown", "touchstart", "wheel"].forEach(t => w.addEventListener(t, e => e.stopPropagation(), { passive: true }));
+    b.onclick = () => { const o = p.hidden; p.hidden = !o; b.setAttribute("aria-expanded", o); };
+    w.querySelectorAll("input[data-l][type=checkbox]").forEach(i => { i.checked = !!LY[i.dataset.l]; i.onchange = () => { LY[i.dataset.l] = i.checked; saveLY(); applyLayers(); if (i.dataset.l === "follow" && i.checked) followScroll(); }; });
+    w.querySelectorAll("input[data-l][type=range]").forEach(i => { i.value = LY[i.dataset.l]; i.oninput = () => { LY[i.dataset.l] = +i.value; saveLY(); applyLayers(); }; });
+    w.querySelector(".reset").onclick = () => { Object.assign(LY, LYDEF); saveLY(); document.querySelectorAll(".lyrPanel input[data-l][type=checkbox]").forEach(i => i.checked = !!LY[i.dataset.l]); document.querySelectorAll(".lyrPanel input[type=range]").forEach(i => i.value = LY[i.dataset.l]); applyLayers(); };
+  };
+  mk("smap", `<div class="hd">On the scroll</div><div class="row"><label><input type="checkbox" data-l="sdots">Places I located</label></div>
+    <div class="row"><label><input type="checkbox" data-l="joins">Joins between the sheets</label></div>
+    <div class="row"><label><input type="checkbox" data-l="warp">Modern coastline, bent to fit</label><div class="sub"><span>opacity</span><input type="range" min="20" max="100" data-l="warpK" aria-label="Coastline opacity"></div></div>
+    <div class="row"><label><input type="checkbox" data-l="follow">Modern map follows the scroll</label></div>`);
+  mk("wmap", `<div class="hd">The Tabula's roads</div><div class="row"><label><input type="checkbox" data-l="legs">Legs, as straight lines</label></div>
+    <div class="row"><label><input type="checkbox" data-l="legcol">Colour legs by agreement</label><div class="sub">green within 25% of the road, gold within 60%, red worse, grey not measured</div></div>
+    <div class="row"><label><input type="checkbox" data-l="stations">All stations</label></div>
+    <div class="row"><label><input type="checkbox" data-l="recon">Lost west, rebuilt (hollow dots)</label></div>
+    <div class="hd">Context</div><div class="row"><label><input type="checkbox" data-l="mjoins">Where the sheet joins fall</label></div>
+    <div class="row"><label><input type="checkbox" data-l="prov">Provinces, about AD 117</label></div>
+    <div class="row"><label><input type="checkbox" data-l="relief">Shaded relief (Esri)</label><div class="sub"><span>opacity</span><input type="range" min="10" max="80" data-l="reliefK" aria-label="Relief opacity"></div></div>`);
+}
+function legend() {
+  const d = isDark(); const lg = document.getElementById("legend"); const shown = RN.map((n, i) => [n, i]).filter(([n, i]) => SITE.located.some(r => r[LC.reg] === i));
+  lg.innerHTML = shown.map(([n, i]) => `<span><i style="background:${RC[i]}"></i>${esc(n)}</span>`).join("") +
+    (LY.legcol ? `<span><i class="ln" style="border-color:${d ? "#5CC49F" : "#2E8A6E"}"></i>leg within 25%</span><span><i class="ln" style="border-color:${d ? "#E8B54F" : "#B07A12"}"></i>within 60%</span><span><i class="ln" style="border-color:${d ? "#F07B66" : "#B23A2A"}"></i>worse</span>` : `<span><i class="ln" style="border-color:var(--road)"></i>leg</span>`) +
+    `<span><i style="background:transparent;border:1.5px solid var(--muted)"></i>rebuilt west</span><span><i style="background:transparent;border:2px solid #B23A2A"></i>selected</span>`;
+}
+
+/* ---------- selection ---------- */
+function rowOf(k) { if (locById[k] != null) return { kind: "loc", r: LOC[locById[k]], s: ST[stById[k]] }; if (stById[k] != null) return { kind: "st", s: ST[stById[k]] }; return null; }
+function drawSel() {
+  pins.forEach(p => p.remove()); pins = [];
+  const s = S.sel ? rowOf(S.sel) : null; const empty = { type: "FeatureCollection", features: [] };
+  const pt = c => ({ type: "FeatureCollection", features: [{ type: "Feature", properties: {}, geometry: { type: "Point", coordinates: c } }] });
+  if (sReady) sm.getSource("sel").setData(s && s.kind === "loc" ? pt(px2ll(s.r[LC.x], s.r[LC.y])) : empty);
+  if (wReady) wm.getSource("sel").setData(s ? pt([s.s[SC.lon], s.s[SC.lat]]) : empty);
+  if (!s || typeof maplibregl === "undefined") return;
+  const pin = (map, c, txt) => { const d = document.createElement("div"); d.className = "pinL"; d.textContent = txt; pins.push(new maplibregl.Marker({ element: d, anchor: "bottom", offset: [0, -12] }).setLngLat(c).addTo(map)); };
+  if (sReady && s.kind === "loc") pin(sm, px2ll(s.r[LC.x], s.r[LC.y]), s.s[SC.label]);
+  if (wReady) pin(wm, [s.s[SC.lon], s.s[SC.lat]], s.s[SC.modern] ? s.s[SC.modern].replace(/^~\s*/, "") : s.s[SC.label]);
+}
+const RCH = c => `<span class="chip" style="background:${RC[c]}"></span>${esc(RN[c])}`;
+const qcls = r => r == null ? "" : (r >= 0.8 && r <= 1.25 ? "ok" : (r >= 1 / 1.6 && r <= 1.6 ? "mid" : "bad"));
+function side() {
+  const box = document.getElementById("side"); const s = S.sel ? rowOf(S.sel) : null;
+  if (!s) { box.innerHTML = `<div class="sub">Click a dot on either map, or search above. Located places show on both maps; every other station shows on the modern map. The panel lists each road leg with the distance written on the scroll and the distance measured today.</div>`; return; }
+  const st = s.s, legs = (SITE.legs_by[st[SC.id]] || []).slice().sort((a, b) => (b[1] || 0) - (a[1] || 0));
+  const rows = legs.map(l => { const ratio = l[5] != null && l[3] ? l[5] / l[3] : (l[4] != null && l[3] ? null : null); const u = l[1] == null ? "no figure" : `${l[1]} ${l[2] === "L" ? "leagues" : (l[2] === "F" ? "units" : "miles")}`;
+    return `<tr data-k="${esc(l[0])}"><td>${esc(nameOf(l[0]))}${l[6] ? " <span class=\"sub\">(rebuilt)</span>" : ""}</td><td class="r">${u}</td><td class="r">${l[3] != null ? fmt(l[3]) : ""}</td><td class="r">${l[4] != null ? fmt(l[4]) : ""}</td><td class="r ${qcls(ratio)}">${l[5] != null ? fmt(l[5]) : ""}</td></tr>`; }).join("");
+  box.innerHTML = `<div class="sub">${RCH(st[SC.reg])}${st[SC.prov] ? " · " + esc(st[SC.prov]) : ""}${s.kind === "loc" ? " · sheet " + esc(s.r[LC.seg]) : ""}${st[SC.recon] ? " · rebuilt from the Antonine Itinerary" : ""}</div>
+    <div class="big">${esc(st[SC.label])}</div>
+    <table class="kv"><tr><td>Today</td><td>${st[SC.modern] ? esc(st[SC.modern]) : "not identified with a modern place"}</td></tr>
+    <tr><td>On the scroll</td><td>${s.kind === "loc" ? (s.r[LC.conf] === "high" ? "located, label read clearly" : "located, with some doubt") : (st[SC.recon] ? "not on the surviving scroll" : "not located by me: modern map only")}</td></tr></table>
+    ${legs.length ? `<table class="legs"><thead><tr><th>Next station</th><th class="r">On the map</th><th class="r">km</th><th class="r">Straight</th><th class="r">Road</th></tr></thead><tbody>${rows}</tbody></table>` : ""}`;
+  box.querySelectorAll(".legs tr[data-k]").forEach(tr => tr.onclick = () => select(tr.dataset.k));
+}
+function select(k, move = true) {
+  const s = rowOf(k); if (!s) return; S.sel = k;
+  const c = s.s[SC.reg]; if (!S.reg.has(c)) { S.reg.add(c); syncReg(); }
+  drawSel(); side();
+  if (s.kind === "loc" && sReady) { following = true; sm.flyTo({ center: px2ll(s.r[LC.x], s.r[LC.y]), zoom: Math.max(sm.getZoom(), 5.6), duration: 800 }); }
+  if (wReady) wm.flyTo({ center: [s.s[SC.lon], s.s[SC.lat]], zoom: Math.max(wm.getZoom(), 5.5), duration: 800 });
+  if (FB) FB.draw();
+  if (move && small()) document.getElementById("atlas").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+window.select = select;
+
+/* ---------- controls ---------- */
+function syncReg() {
+  document.querySelectorAll("#regRow .btn[data-c]").forEach(b => b.setAttribute("aria-pressed", S.reg.has(+b.dataset.c)));
+  document.querySelectorAll("#regRow .btn[data-all]").forEach(b => b.setAttribute("aria-pressed", S.reg.size === RN.length));
+  refreshData();
+}
+(function regRow() {
+  const row = document.getElementById("regRow");
+  const all = document.createElement("button"); all.className = "btn"; all.dataset.all = 1; all.textContent = "All"; row.appendChild(all);
+  all.onclick = () => { S.reg = new Set(RN.map((_, i) => i)); syncReg(); };
+  RN.forEach((k, i) => { const b = document.createElement("button"); b.className = "btn"; b.dataset.c = i; b.innerHTML = `<i style="background:${RC[i]}"></i>${esc(k)}`; row.appendChild(b);
+    b.onclick = () => { if (S.reg.size === RN.length) S.reg = new Set([i]); else if (S.reg.has(i)) { S.reg.delete(i); if (!S.reg.size) S.reg = new Set(RN.map((_, j) => j)); } else S.reg.add(i); syncReg(); }; });
+  syncReg();
+})();
+(function focusRow() {
+  const row = document.getElementById("focusRow");
+  const FO = [["Whole scroll", null], ["Rome", "TPPlace1203"], ["Kent", "TPPlace548"], ["Lyon", "TPPlace730"], ["Aquileia", "TPPlace1125"], ["Carthage", "TPPlace60"], ["Constantinople", "TPPlace2082"], ["Antioch", "TPPlace2374"], ["Jerusalem", "TPPlace438"], ["India", "TPPlace2797"]];
+  FO.forEach(([n, key]) => { const x = document.createElement("button"); x.className = "btn"; x.textContent = n; row.appendChild(x);
+    x.onclick = () => {
+      if (!key) { S.sel = null; drawSel(); side(); if (sReady) { following = true; sm.fitBounds(MAPB, { padding: 4, duration: 800 }); } if (wReady) wm.flyTo({ center: small() ? [22, 38] : [24, 39], zoom: small() ? 1.6 : 2.55, duration: 800 }); if (FB) FB.draw(); return; }
+      select(key); }; });
+})();
+(function search() {
+  const q = document.getElementById("q"), sug = document.getElementById("sug");
+  const IDX = ST.map(r => ({ k: r[SC.id], t: r[SC.label], s: (r[SC.modern] || "unidentified") + (r[SC.loc] ? " · on both maps" : (r[SC.recon] ? " · rebuilt west" : " · modern map")), h: (r[SC.label] + " " + (r[SC.modern] || "")).toLowerCase().replace(/v/g, "u"), loc: r[SC.loc] }));
+  let cur = [], ai = -1;
+  const show = () => { sug.innerHTML = cur.map((c, i) => `<li role="option" aria-selected="${i === ai}" data-i="${i}">${esc(c.t)} <span>${esc(c.s)}</span></li>`).join(""); sug.style.display = cur.length ? "block" : "none";
+    sug.querySelectorAll("li").forEach(li => li.onmousedown = e => { e.preventDefault(); pick(cur[+li.dataset.i]); }); };
+  const pick = c => { if (!c) return; q.value = c.t; sug.style.display = "none"; select(c.k); };
+  q.addEventListener("input", () => { const v = q.value.trim().toLowerCase().replace(/v/g, "u"); ai = -1; if (v.length < 2) { cur = []; show(); return; }
+    cur = IDX.filter(x => x.h.includes(v)).sort((a, b) => (b.loc - a.loc) || ((a.t.toLowerCase().replace(/v/g, "u").startsWith(v) ? 0 : 1) - (b.t.toLowerCase().replace(/v/g, "u").startsWith(v) ? 0 : 1))).slice(0, 12); show(); });
+  q.addEventListener("keydown", e => { if (e.key === "ArrowDown") { ai = Math.min(cur.length - 1, ai + 1); show(); e.preventDefault(); } else if (e.key === "ArrowUp") { ai = Math.max(0, ai - 1); show(); e.preventDefault(); }
+    else if (e.key === "Enter") { pick(cur[ai >= 0 ? ai : 0]); } else if (e.key === "Escape") { sug.style.display = "none"; } });
+  q.addEventListener("blur", () => setTimeout(() => sug.style.display = "none", 150));
+})();
+
+/* ---------- fallback: no map library ---------- */
+function fallback() {
+  const sbox = document.getElementById("smap"), wbox = document.getElementById("wmap");
+  [sbox, wbox].forEach(b => b.querySelector(".loading")?.remove());
+  const img = new Image(); img.src = F.small; const IW = F.small_wh[0], IH = F.small_wh[1], kx = IW / (F.crop[2] - F.crop[0]);
+  const mk = (box, note) => { const cv = document.createElement("canvas"); cv.className = "fallback"; box.appendChild(cv); const n = document.createElement("div"); n.className = "fbnote"; n.textContent = note; box.appendChild(n); return cv; };
+  const sc = mk(sbox, "The map library did not load, so this is a still view of the scroll, scaled to fit. Click a dot to select a place."), wc = mk(wbox, "Still view of the modern map (Natural Earth). Click a dot to select a place.");
+  const geo = { lo0: -12, lo1: 92, la0: 5, la1: 56 };
+  let sT = null, wT = null;
+  const draw = () => {
+    const d = devicePixelRatio || 1;
+    { const W = sbox.clientWidth, H = sbox.clientHeight; sc.width = W * d; sc.height = H * d; const x = sc.getContext("2d"); x.setTransform(d, 0, 0, d, 0, 0);
+      x.fillStyle = css("--panel"); x.fillRect(0, 0, W, H); const k = W / IW, oy = (H - IH * k) / 2; sT = { k, oy };
+      if (img.complete && img.naturalWidth) x.drawImage(img, 0, oy, IW * k, IH * k);
+      LOC.forEach(r => { if (!S.reg.has(r[LC.reg])) return; const px = (r[LC.x] - F.crop[0]) * kx * k, py = oy + (r[LC.y] - F.crop[1]) * kx * k; x.beginPath(); x.arc(px, py, r[LC.id] === S.sel ? 5 : 2.4, 0, 7); x.fillStyle = RC[r[LC.reg]]; x.fill(); x.strokeStyle = r[LC.id] === S.sel ? "#B23A2A" : "#fff"; x.lineWidth = r[LC.id] === S.sel ? 2.5 : .7; x.stroke(); }); }
+    { const W = wbox.clientWidth, H = wbox.clientHeight; wc.width = W * d; wc.height = H * d; const x = wc.getContext("2d"); x.setTransform(d, 0, 0, d, 0, 0);
+      const cl = Math.cos(36 * Math.PI / 180); const k = Math.min(W / ((geo.lo1 - geo.lo0) * cl), H / (geo.la1 - geo.la0)), ox = (W - k * (geo.lo1 - geo.lo0) * cl) / 2, oy = (H - k * (geo.la1 - geo.la0)) / 2; wT = { k, ox, oy, cl };
+      const P = (lo, la) => [ox + (lo - geo.lo0) * cl * k, oy + (geo.la1 - la) * k];
+      x.fillStyle = css("--sea"); x.fillRect(0, 0, W, H); x.fillStyle = css("--land");
+      WORLD.features.forEach(f => { const g = f.geometry, polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates; polys.forEach(pg => { x.beginPath(); pg[0].forEach((c, j) => { const [a, b] = P(c[0], c[1]); j ? x.lineTo(a, b) : x.moveTo(a, b); }); x.fill(); }); });
+      if (LY.legs) { x.strokeStyle = css("--road"); x.globalAlpha = .6; x.lineWidth = .7; SITE.leg_lines.forEach(l => { const [a, b] = P(l[0], l[1]), [c, e] = P(l[2], l[3]); x.beginPath(); x.moveTo(a, b); x.lineTo(c, e); x.stroke(); }); x.globalAlpha = 1; }
+      LOC.forEach(r => { if (!S.reg.has(r[LC.reg])) return; const [a, b] = P(r[LC.lon], r[LC.lat]); x.beginPath(); x.arc(a, b, r[LC.id] === S.sel ? 5 : 2.6, 0, 7); x.fillStyle = RC[r[LC.reg]]; x.fill(); x.strokeStyle = r[LC.id] === S.sel ? "#B23A2A" : "#fff"; x.lineWidth = r[LC.id] === S.sel ? 2.5 : .7; x.stroke(); }); }
+  };
+  const hit = (e, box, geoMode) => { const b = box.getBoundingClientRect(), mx = e.clientX - b.left, my = e.clientY - b.top; let best = null, bd = 12;
+    LOC.forEach(r => { if (!S.reg.has(r[LC.reg])) return; let px, py; if (geoMode) { px = wT.ox + (r[LC.lon] - geo.lo0) * wT.cl * wT.k; py = wT.oy + (geo.la1 - r[LC.lat]) * wT.k; } else { px = (r[LC.x] - F.crop[0]) * kx * sT.k; py = sT.oy + (r[LC.y] - F.crop[1]) * kx * sT.k; }
+      const dd = Math.hypot(px - mx, py - my); if (dd < bd) { bd = dd; best = r[LC.id]; } }); if (best != null) select(best, false); };
+  sc.addEventListener("click", e => hit(e, sbox, false)); wc.addEventListener("click", e => hit(e, wbox, true));
+  img.onload = draw; draw(); new ResizeObserver(draw).observe(sbox); new ResizeObserver(draw).observe(wbox); redraws.push(draw);
+  FB = { draw }; legend();
+}
+
+/* ---------- charts ---------- */
+function unitChart() {
+  const box = document.getElementById("unitChart"); const U = R.units.by_province;
+  const D = Object.entries(U).map(([p, v]) => ({ p: p.replace("Italia, regio ", "Italy, region "), v: v.km_per_unit_gc, n: v.n, q: [v.q25, v.q75], lea: ["Aquitania", "Lugdunensis", "Belgica", "Germania Inferior", "Germania Superior"].includes(p) })).sort((a, b) => b.v - a.v);
+  resp(box, (W, sm_) => { const lw = sm_ ? 130 : 200, rh = 24, top = 26, H = top + D.length * rh + 30, svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Kilometres per map unit by province" }, box);
+    const x0 = .8, x1 = 3, x = v => lw + (v - x0) / (x1 - x0) * (W - lw - 34);
+    (sm_ ? [1, 2, 3] : [1, 1.5, 2, 2.5, 3]).forEach(v => { el("line", { x1: x(v), x2: x(v), y1: top - 4, y2: top + D.length * rh, stroke: css("--rule") }, svg); lbl(svg, x(v), H - 12, v.toFixed(1) + " km", "lab s m", "middle"); });
+    [[R.units.rm_km, sm_ ? "mile" : "Roman mile", "end"], [R.units.league_km, sm_ ? "league" : "Gallic league", "start"]].forEach(([v, t, an]) => { el("line", { x1: x(v), x2: x(v), y1: top - 10, y2: top + D.length * rh, stroke: css("--fg"), "stroke-dasharray": "4 3" }, svg); lbl(svg, x(v) + (an === "end" ? -4 : 4), top - 14, t + " " + v.toFixed(2), "lab s", an); });
+    D.forEach((d, i) => { const y = top + i * rh + rh / 2; lbl(svg, lw - 8, y + 4, sh(d.p, sm_).replace("Italy, region ", sm_ ? "Italy " : "Italy, region "), "lab", "end");
+      el("line", { x1: x(Math.max(x0, d.q[0])), x2: x(Math.min(x1, d.q[1])), y1: y, y2: y, stroke: d.lea ? css("--blue") : css("--red"), "stroke-opacity": .35, "stroke-width": 4 }, svg);
+      const c = el("circle", { cx: x(d.v), cy: y, r: 5.5, fill: d.lea ? css("--blue") : css("--red"), stroke: css("--card"), "stroke-width": 1 }, svg);
+      c.addEventListener("mousemove", e => showTip(`<b>${esc(d.p)}</b><br>${d.v.toFixed(2)} km per unit (median of ${d.n} legs)<br>middle half ${d.q[0].toFixed(2)} to ${d.q[1].toFixed(2)}`, e.clientX, e.clientY)); c.addEventListener("mouseleave", hideTip); }); });
+  document.getElementById("unitLegend").innerHTML = `<span><i style="background:var(--blue)"></i>Gaul north of Lyon and the Germanies (leagues)</span><span><i style="background:var(--red)"></i>elsewhere (miles)</span><span><i class="ln sq" style="border-color:var(--muted);border-top-width:4px;opacity:.5"></i>middle half of legs</span>`;
+}
+function distChart() {
+  const box = document.getElementById("distChart"); const pts = [];
+  for (const [id, legs] of Object.entries(SITE.legs_by)) legs.forEach(l => { if (id < l[0] && l[3] && l[5] && l[2] !== "F" && !l[6]) pts.push([l[3], l[5], id, l[0], stById[id] != null ? ST[stById[id]][SC.reg] : 0]); });
+  resp(box, (W, sm_) => { const H = Math.min(460, W * .8), ml = 50, mb = 40, svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Stated against road distance for each leg" }, box);
+    const lx = v => Math.log10(v), a = lx(2), b = lx(250), x = v => ml + (lx(v) - a) / (b - a) * (W - ml - 12), y = v => H - mb - (lx(v) - a) / (b - a) * (H - mb - 10);
+    const band = el("path", { d: `M${x(2)} ${y(2 * 1.25)} L${x(250 / 1.25)} ${y(250)} L${x(250)} ${y(250)} L${x(250)} ${y(250 * .8)} L${x(2.5)} ${y(2)} L${x(2)} ${y(2)} Z`, fill: css("--rule"), opacity: .8 }, svg);
+    [5, 10, 20, 50, 100, 200].forEach(v => { el("line", { x1: x(v), x2: x(v), y1: y(2), y2: y(250), stroke: css("--rule") }, svg); el("line", { x1: x(2), x2: x(250), y1: y(v), y2: y(v), stroke: css("--rule") }, svg); lbl(svg, x(v), H - 22, v, "lab s m", "middle"); lbl(svg, ml - 6, y(v) + 4, v, "lab s m", "end"); });
+    el("line", { x1: x(2), y1: y(2), x2: x(250), y2: y(250), stroke: css("--fg"), "stroke-dasharray": "4 3" }, svg);
+    lbl(svg, (ml + W) / 2, H - 4, "km on the map (Roman miles or leagues converted)", "lab s m", "middle");
+    const t = lbl(svg, 12, (H - mb) / 2, "km along the road today", "lab s m", "middle"); t.setAttribute("transform", `rotate(-90 12 ${(H - mb) / 2})`);
+    const g = el("g", {}, svg);
+    pts.forEach(p => { if (p[0] < 2 || p[0] > 250 || p[1] < 2 || p[1] > 250) return; const c = el("circle", { cx: x(p[0]), cy: y(p[1]), r: sm_ ? 2.2 : 2.8, fill: RC[p[4]], "fill-opacity": .6 }, g);
+      c.addEventListener("mousemove", e => showTip(`<b>${esc(nameOf(p[2]))}</b> to <b>${esc(nameOf(p[3]))}</b><br>map ${fmt(p[0])} km, road ${fmt(p[1])} km`, e.clientX, e.clientY)); c.addEventListener("mouseleave", hideTip); c.style.cursor = "pointer"; c.addEventListener("click", () => select(p[2])); }); });
+  const used = [...new Set(pts.map(p => p[4]))].sort((a, b) => a - b);
+  document.getElementById("distLegend").innerHTML = used.map(i => `<span><i style="background:${RC[i]}"></i>${esc(RN[i])}</span>`).join("") + `<span><i class="sq" style="background:var(--rule)"></i>within 25%</span>`;
+}
+function stretchChart() {
+  const box = document.getElementById("stretchChart"); const D = SITE.region_stats.filter(r => r.aniso != null).sort((a, b) => b.aniso - a.aniso);
+  const dir = b => { const n = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"]; return n[Math.round(((b % 360) + 360) % 360 / 45) % 8]; };
+  resp(box, (W, sm_) => { const lw = sm_ ? 130 : 210, rh = 28, H = 8 + D.length * rh + 28, svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "How stretched each region is" }, box);
+    const lx = v => Math.log(v), x = v => lw + (lx(v) - lx(1)) / (lx(80) - lx(1)) * (W - lw - 50);
+    [1, 2, 5, 10, 20, 50].forEach(v => { el("line", { x1: x(v), x2: x(v), y1: 4, y2: 8 + D.length * rh, stroke: css("--rule") }, svg); lbl(svg, x(v), H - 10, v + "×", "lab s m", "middle"); });
+    D.forEach((d, i) => { const y = 8 + i * rh; lbl(svg, lw - 8, y + rh / 2 + 4, sh(d.region, sm_), "lab", "end");
+      const r = el("rect", { x: x(1), y: y + 5, width: Math.max(1, x(d.aniso) - x(1)), height: rh - 10, fill: RC[RN.indexOf(d.region)], "fill-opacity": .85 }, svg);
+      r.addEventListener("mousemove", e => showTip(`<b>${esc(d.region)}</b><br>${d.aniso.toFixed(1)} times more parchment per km in one direction than the other<br>the scroll runs ${dir(d.scroll_bearing)} on the ground (${d.scroll_bearing}°)<br>1 cm: ${d.km_per_cm_ew} km east-west, ${d.km_per_cm_ns} km north-south<br>${d.located} located places`, e.clientX, e.clientY)); r.addEventListener("mouseleave", hideTip);
+      lbl(svg, x(d.aniso) + 6, y + rh / 2 + 4, d.aniso.toFixed(d.aniso < 10 ? 1 : 0) + "×", "lab b"); }); });
+}
+function spaceChart() {
+  const box = document.getElementById("spaceChart"); const D = SITE.region_stats.slice();
+  resp(box, (W, sm_) => { const lw = sm_ ? 130 : 210, rh = 34, H = 8 + D.length * rh + 26, svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Share of the scroll against share of land" }, box);
+    const mx = 22, x = v => lw + v / mx * (W - lw - 50);
+    [0, 5, 10, 15, 20].forEach(v => { el("line", { x1: x(v), x2: x(v), y1: 4, y2: 8 + D.length * rh, stroke: css("--rule") }, svg); lbl(svg, x(v), H - 8, v + "%", "lab s m", "middle"); });
+    D.forEach((d, i) => { const y = 8 + i * rh; lbl(svg, lw - 8, y + rh / 2 + 4, sh(d.region, sm_), "lab", "end");
+      const r1 = el("rect", { x: x(0), y: y + 4, width: Math.max(1, x(d.scroll_pct) - x(0)), height: 11, fill: RC[i] }, svg);
+      const r2 = el("rect", { x: x(0), y: y + 17, width: d.land_pct == null ? 0 : Math.max(1, x(d.land_pct) - x(0)), height: 8, fill: css("--muted"), "fill-opacity": .55 }, svg);
+      const st = el("line", { x1: x(d.stations_pct), x2: x(d.stations_pct), y1: y + 2, y2: y + 27, stroke: css("--fg"), "stroke-width": 2 }, svg);
+      [r1, r2, st].forEach(rr => { rr.addEventListener("mousemove", e => showTip(`<b>${esc(d.region)}</b><br>${d.scroll_pct}% of the scroll<br>${d.land_pct == null ? "beyond the provinces" : d.land_pct + "% of the provinces' land"}<br>${d.stations_pct}% of the surviving stations${d.space_ratio ? "<br>" + d.space_ratio.toFixed(2) + " times its share of land" : ""}`, e.clientX, e.clientY)); rr.addEventListener("mouseleave", hideTip); });
+      if (d.land_pct == null) lbl(svg, x(0) + 4, y + 25, "beyond the frontier", "lab s m"); }); });
+  document.getElementById("spaceLegend").innerHTML = `<span><i class="sq" style="background:var(--red)"></i>share of the scroll (region colour)</span><span><i class="sq" style="background:var(--muted);opacity:.55"></i>share of the land</span><span><i class="ln" style="border-color:var(--fg);transform:rotate(90deg);width:12px"></i>share of the stations</span>`;
+}
+let LOST = 1;
+function romeChart() {
+  const box = document.getElementById("romeChart"); const SEGS = SITE.segments, mw = R.rome.seg_median_px, X0 = SEGS[0].x0, X1 = SEGS[SEGS.length - 1].x1;
+  const row = document.getElementById("lostRow");
+  [0, 1, 2, 3, 4].forEach(k => { const b = document.createElement("button"); b.className = "btn"; b.textContent = k; b.dataset.k = k; b.onclick = () => { LOST = k; row.querySelectorAll(".btn").forEach(z => z.setAttribute("aria-pressed", +z.dataset.k === LOST)); redraw(); }; row.appendChild(b); });
+  row.querySelectorAll(".btn").forEach(z => z.setAttribute("aria-pressed", +z.dataset.k === LOST));
+  let redraw;
+  resp(box, (W, sm_) => { redraw = () => { box.innerHTML = ""; draw(W, sm_); }; draw(W, sm_); });
+  function draw(W, sm_) {
+    const H = 120, svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Rome's position along the scroll" }, box);
+    const tot = (X1 - X0) + 4 * mw, x = v => 8 + v / tot * (W - 16), off = (4 - LOST) * mw;
+    for (let k = 0; k < LOST; k++) { const a = off + k * mw; el("rect", { x: x(a), y: 40, width: x(a + mw) - x(a) - 1, height: 34, fill: "none", stroke: css("--muted"), "stroke-dasharray": "4 3" }, svg); lbl(svg, (x(a) + x(a + mw)) / 2, 61, "lost", "lab s m", "middle"); }
+    const base = off + LOST * mw;
+    SEGS.forEach(s => { const a = base + s.x0 - X0, b = base + s.x1 - X0; el("rect", { x: x(a), y: 40, width: x(b) - x(a) - 1, height: 34, fill: css("--land"), stroke: css("--border") }, svg); if (!sm_ || ["II", "V", "VIII", "XII"].includes(s.seg)) lbl(svg, (x(a) + x(b)) / 2, 88, s.seg, "lab s m", "middle"); });
+    const L0 = off, L1 = base + X1 - X0, mid = (L0 + L1) / 2, rx = base + R.rome.x - X0;
+    el("line", { x1: x(mid), x2: x(mid), y1: 30, y2: 82, stroke: css("--fg"), "stroke-dasharray": "3 3" }, svg); lbl(svg, x(mid), 104, "middle", "lab s", "middle");
+    el("circle", { cx: x(rx), cy: 57, r: 9, fill: "#B07A12", stroke: css("--fg"), "stroke-width": 1.5 }, svg);
+    const pct = 100 * (rx - L0) / (L1 - L0);
+    lbl(svg, x(rx), 22, `Rome: ${pct.toFixed(0)}% of the way along`, "lab b", pct > 75 ? "end" : "middle");
+  }
+}
+let MODE = "foot";
+function daysChart() {
+  const box = document.getElementById("daysChart"); const row = document.getElementById("modeRow");
+  const M = [["foot", "On foot"], ["cart", "By cart"], ["courier", "By courier"]];
+  M.forEach(([k, t]) => { const b = document.createElement("button"); b.className = "btn"; b.textContent = t; b.dataset.k = k; b.onclick = () => { MODE = k; row.querySelectorAll(".btn").forEach(z => z.setAttribute("aria-pressed", z.dataset.k === MODE)); redraws.forEach(f => f()); }; row.appendChild(b); });
+  row.querySelectorAll(".btn").forEach(z => z.setAttribute("aria-pressed", z.dataset.k === MODE));
+  const D = Object.entries(R.routes).filter(([k, v]) => v && k !== "Carthage").map(([k, v]) => ({ k, ...v })).sort((a, b) => a.km - b.km);
+  resp(box, (W, sm_) => { const lw = sm_ ? 110 : 140, rh = 28, H = 8 + D.length * rh + 26, svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Days of travel from Rome" }, box);
+    const val = d => MODE === "foot" ? d.foot : MODE === "cart" ? d.cart : d.courier, mx = Math.max(...D.map(d => d.foot)) / (MODE === "foot" ? 1 : MODE === "cart" ? 2 : 3.5), x = v => lw + v / mx * (W - lw - 70);
+    D.forEach((d, i) => { const y = 8 + i * rh; lbl(svg, lw - 8, y + rh / 2 + 4, d.k, "lab", "end");
+      const r = el("rect", { x: x(0), y: y + 5, width: Math.max(1, x(val(d)) - x(0)), height: rh - 10, fill: d.recon_legs > d.legs / 4 ? css("--muted") : css("--red"), "fill-opacity": .85 }, svg);
+      r.addEventListener("mousemove", e => showTip(`<b>Rome to ${esc(d.k)}</b> (${esc(d.label)})<br>${fmt(d.km)} km by the map's figures over ${d.legs} legs${d.road_km ? "<br>" + fmt(d.road_km) + " km along the mapped Roman roads" : ""}<br>${d.foot} days on foot, ${d.cart} by cart, ${d.courier} by courier${d.recon_legs ? "<br>" + d.recon_legs + " legs from the rebuilt west" : ""}`, e.clientX, e.clientY)); r.addEventListener("mouseleave", hideTip);
+      lbl(svg, x(val(d)) + 6, y + rh / 2 + 4, `${val(d)} days`, "lab b"); });
+    lbl(svg, lw, H - 6, sm_ ? "grey: mostly rebuilt west" : "grey: mostly on the rebuilt western roads", "lab s m"); });
+}
+function regTable() {
+  const t = document.getElementById("regTable"); const D = SITE.region_stats;
+  t.innerHTML = `<thead><tr><th>Region</th><th class="r">Located</th><th class="r">Scroll</th><th class="r">Land</th><th class="r">Stretch</th><th class="r">Road km</th></tr></thead><tbody>` +
+    D.map((d, i) => `<tr data-k="${i}"><td><span class="chip" style="background:${RC[i]}"></span>${esc(d.region)}</td><td class="r">${d.located}</td><td class="r">${d.scroll_pct}%</td><td class="r">${d.land_pct == null ? "n/a" : d.land_pct + "%"}</td><td class="r">${d.aniso == null ? "too few" : d.aniso.toFixed(1) + "×"}</td><td class="r">${fmt(d.road_km)}</td></tr>`).join("") + "</tbody>";
+  t.querySelectorAll("tr[data-k]").forEach(tr => tr.onclick = () => { const i = +tr.dataset.k; const rs = LOC.filter(r => r[LC.reg] === i), ss = ST.filter(r => r[SC.reg] === i); if (!ss.length) return;
+    S.reg = new Set([i]); syncReg();
+    const lo = ss.map(r => r[SC.lon]), la = ss.map(r => r[SC.lat]);
+    if (wReady) wm.fitBounds([[Math.min(...lo), Math.min(...la)], [Math.max(...lo), Math.max(...la)]], { padding: 30, duration: 800 });
+    if (sReady && rs.length) { following = true; const xs = rs.map(r => r[LC.x]); sm.fitBounds([px2ll(Math.min(...xs) - 100, F.map_y[1]), px2ll(Math.max(...xs) + 100, F.map_y[0])], { padding: 10, duration: 800 }); }
+    document.getElementById("atlas").scrollIntoView({ behavior: "smooth", block: "start" }); });
+}
+
+/* ---------- theme ---------- */
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark";
+  const P = pal();
+  if (wReady) { wm.setPaintProperty("bg", "background-color", P.sea); wm.setPaintProperty("land", "fill-color", P.land); wm.setPaintProperty("borders", "line-color", P.border); wm.setPaintProperty("joins", "line-color", isDark() ? "#EEE8DC" : "#22201C"); }
+  if (sReady) sm.setPaintProperty("bg", "background-color", P.panel);
+  applyLayers(); redraws.forEach(f => f()); };
+
+startMaps(); side(); unitChart(); distChart(); stretchChart(); spaceChart(); romeChart(); daysChart(); regTable();
+</script>
+/*FULLSCREEN*/
+</body>
+</html>

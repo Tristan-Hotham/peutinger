@@ -1,0 +1,35 @@
+MIT License
+
+Copyright (c) 2026 Tristan Hotham
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+This licence covers the code in code/, reddit/collage.py and the page scripts.
+The text of the page, paper and blog post, the figures and the derived data
+files in data/ are released under CC BY 4.0. Konrad Miller's 1887 facsimile of
+the Tabula Peutingeriana (tiles/ and img/, from Wikimedia Commons) is in the
+public domain. Station names, identifications, coordinates and leg distances
+come from OmnesViae (René Voorburg, omnesviae.org), after Richard Talbert's
+Rome's World (2010); no licence is stated for that data, which is used here as
+factual data with credit. Road distances are derived from Itiner-e (CC BY 4.0).
+Province outlines in data/provinces.json are derived from the Digital Atlas of
+the Roman Empire (DARE, Johan Åhlfeldt), CC BY-SA. Pleiades matches are derived
+from Pleiades (pleiades.stoa.org), CC BY 3.0. Facts quoted from Wikipedia are
+CC BY-SA 4.0. Natural Earth is public domain.

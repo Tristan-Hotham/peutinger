@@ -1,0 +1,150 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\newfontfamily\headfont{Inter}[UprightFont=*-ExtraBold,BoldFont=*-ExtraBold,Extension=.otf,Path=/usr/share/fonts/opentype/inter/]
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{graphicx,booktabs,float,caption,array,xcolor,longtable}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[round]{natbib}
+\usepackage{setspace}
+\setstretch{1.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\titleformat{\section}{\headfont\Large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\headfont\large}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\urlstyle{same}
+\hypersetup{pdftitle={The Peutinger Table Against a Modern Map},pdfauthor={Tristan Hotham}}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries The Peutinger Table Against a Modern Map\par}
+\vspace{0.4em}
+{\large Shape, space and distance on a Roman road map:\\{{located.n|int}} places located on the scroll and {{source.legs|int}} road legs measured\par}
+\vspace{1.2em}
+{\large Tristan Hotham\par}
+\vspace{0.3em}
+{\small Independent researcher\\
+ORCID: 0000-0003-4931-9349\\
+DOI: \href{https://doi.org/{{meta.doi}}}{https://doi.org/{{meta.doi}}}\par}
+\vspace{0.8em}
+2026
+\end{center}
+
+\begin{quote}
+\small
+\begin{center}\textbf{Abstract}\end{center}
+The Peutinger Table (Tabula Peutingeriana), a medieval copy of a Roman road map, compresses the world from Britain to India into a strip of parchment about {{source.parchment_m|f2}} m long and {{source.parchment_cm_high|int}} cm high, yet records the distance between road stations. I combine the OmnesViae dataset of the Tabula ({{source.tp|int}} stations and {{source.legs_surv|int}} legs on the surviving sheets, after Talbert's identifications) with {{located.n|int}} places located by eye on Konrad Miller's 1887 facsimile and with road distances along the Itiner-e network. The figures on the map are not labelled with a unit; measured on the ground, one unit covers a median {{units.Mile.km_per_unit_gc|f2}} km in a straight line outside Gaul and {{units.League.km_per_unit_gc|f2}} km in Aquitania, Lugdunensis, Belgica and the Germanies, a ratio of {{units.league_over_mile|f2}}, consistent with Roman miles and Gallic leagues of one and a half miles. Converted accordingly, the written distances fall between the straight line (median {{dist.gc_median|f2}} of the figure) and the mapped road (median {{dist.road_median|f2}}); {{dist.road_within25_pct|int}}\% of {{dist.n_road|int}} legs agree with the road to within 25\%, and long journeys from Rome agree to within a few per cent in the west and about an eighth in the east. The shape, by contrast, is compressed {{shape.stretch_whole|f1}} times more north to south than east to west ({{shape.km_per_cm_ew|f1}} km per cm against {{shape.km_per_cm_ns|f1}}), with regions laid on their sides; Italy receives {{regions.Italy and islands.space_ratio|f1}} times its share of land. Rome lies {{rome.frac|f1}}\% of the way along the surviving strip; it would be central only if about {{rome.lost_for_centre|f1}} sheets were lost at the western end. The surviving sheets record about {{total.km|int}} km of road, {{total.days.foot|int}} days on foot.
+
+\textbf{Keywords:} Tabula Peutingeriana; Roman roads; historical cartography; map distortion; itineraries; Itiner-e
+\end{quote}
+
+\section{Introduction}
+The Peutinger Table is a copy, made around 1200, of a late Roman map of the road network of the Roman world and beyond \citep{talbert}. It survives in Vienna as eleven parchment sheets joined into a single strip; a first sheet, which showed most of Britain and Spain, is lost. The map is famously distorted: seas are thin ribbons, peninsulas lie along the strip, and the whole known world is pressed into a band roughly twenty times as long as it is high. At the same time it is a working itinerary, drawing roads as lines with a kink at each station and writing beside each leg the distance to the next.
+
+This study asks how wrong the shape is and how right the numbers are. Specifically: which units the figures are in, and how well they match distances measured today; how stretched the map is east to west against north to south, overall and region by region; which regions get the most space; where Rome falls on the strip; and how much road, and how many days of travel, the surviving sheets record. The paper accompanies an interactive comparison of the scroll and a modern map (\url{{{meta.page}}}).
+
+\section{Data}
+\textbf{OmnesViae.} The road data come from the JSON-LD export of OmnesViae \citep{omnesviae}, a route planner by Ren\'e Voorburg built on the Tabula and on Talbert's identifications \citep{talbert}, with coordinates linked to Pleiades \citep{pleiades}. It lists {{source.places|int}} stations (one duplicated) and {{source.legs|int}} legs. Each station has its name as written on the map, often a modern and classical name, coordinates and a symbol code; each leg has its two ends, the written figure (missing for {{source.legs_nodist|int}}) and flags for reconstruction, sea, mountains and rivers. OmnesViae fills the lost western sheet with {{source.ov|int}} stations from the Antonine Itinerary; I treat these {{source.legs_recon|int}} reconstructed legs separately. {{source.tp_coords|int}} surviving stations have coordinates. As a check, {{source.pleiades_10km_pct|int}}\% of the {{source.pleiades_checked|int}} stations whose name matches a precisely located Pleiades place lie within 10 km of it.
+
+\textbf{The facsimile.} Konrad Miller's 1887 facsimile of the whole map \citep{miller}, {{source.miller_w|int}} by {{source.miller_h|int}} pixels as used, public domain. The painted strip is {{source.map_px_w|int}} pixels long; the joins between the eleven sheets are marked by rules in the margin.
+
+\textbf{Roads, provinces and outlines.} Road distances use the Itiner-e network of Roman roads \citep{itinere} as prepared in an earlier study \citep{romanroads}: {{dist.network_km|int}} km of road sections as a graph. Provinces of about AD 117 come from the Digital Atlas of the Roman Empire \citep{dare}; coastlines from Natural Earth \citep{naturalearth}. Travel speeds are those given by English Wikipedia \citep{wiki}.
+
+\section{Methods}
+\subsection{Locating places on the scroll}
+No table of positions on the Tabula exists, so I read the facsimile at full resolution sheet by sheet and recorded the pixel position of {{located.n|int}} stations, at the station's picture where it has one and otherwise at the start of its label, matching each to its OmnesViae entry by its written name. {{located.high|int}} were read clearly and {{located.medium|int}} with some doubt. Every sheet has at least {{located.min_per_segment|int}}. The sample favours legible and well-known places and is thinner in the far east, where the map has fewer stations.
+
+\subsection{Units and distances}
+Each leg is assigned a unit zone by the province of its first station: leagues in Aquitania, Lugdunensis, Belgica, Germania Inferior and Germania Superior, the area beyond Lyon where the map notes ``usque hic legas''; an unknown unit in Persia, Central Asia and India; Roman miles elsewhere. Figures are converted at {{units.rm_km|f2}} km per mile and {{units.league_km|f2}} km per league. The straight-line distance is the great-circle distance between the OmnesViae coordinates. The road distance places each station on the nearest Itiner-e road section within {{dist.snap_km|int}} km and takes the shortest path along the network between the two points, keeping it only when it is at most twice the straight line plus 10 km. Agreement is measured by the ratio of measured to stated km.
+
+\subsection{Shape, stretch and space}
+For the whole strip, I compare the east-west and north-south spans of the located places with the length and height of the parchment. For each region (groups of provinces, plus three regions beyond the frontier) with at least 8 located places, I fit an affine map from local east and north kilometres to scroll pixels by least squares. Its singular values give the scale in the most and least stretched ground directions; their ratio is the region's stretch, independent of how the region is turned. The ground direction drawn along the scroll from left to right is also recorded. For space, each pixel of the painted strip (at a tenth of full resolution) is assigned to the region of its nearest located place; a region's share of the scroll is compared with its share of the land of the provinces. A smooth thin-plate surface through the located places is used to carry modern coastlines onto the scroll and to draw on the modern map where each sheet join falls; these are illustrations, not measurements.
+
+\subsection{Rome, totals and journeys}
+Rome's position is its distance from the left edge of the painted strip over the strip's length; lost sheets are modelled as sheets of the median surviving width added at the western end. Totals add the written figures of the surviving legs. Journeys from Rome are shortest paths over all legs weighted by the written distance; {{network.legs_filled|int}} legs without a figure are weighted by their road distance, their straight-line distance times {{network.road_gc|f2}} (the median ratio of road to straight line), or a typical leg of {{network.median_leg_km|f1}} km. The map draws no sea crossings, so neither do the routes. Days use 22.5 km a day on foot, 45 by cart and 80 by courier relay \citep{wiki}.
+
+\section{Results}
+\subsection{The two maps}
+Figure~\ref{fig:maps} sets the located places on the scroll beside the same places today. West to east along the strip follows west to east on the ground closely: the rank correlation of longitude with position along the scroll is {{shape.x_spearman_lon|f2}}, while that of latitude with height on the scroll is only {{shape.y_spearman_lat|f2}}.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_maps.jpg}
+\caption{The located places on Miller's facsimile, in two halves (top), and on a modern map with the Tabula's legs (bottom).}\label{fig:maps}\end{figure}
+
+\subsection{Units}
+Outside the league zone, one written unit covers a median {{units.Mile.km_per_unit_gc|f2}} km in a straight line and {{units.Mile.km_per_unit_road|f2}} km along the road ({{units.Mile.n|int}} legs). In the league zone the figures are {{units.League.km_per_unit_gc|f2}} and {{units.League.km_per_unit_road|f2}} ({{units.League.n|int}} legs), {{units.league_over_mile|f2}} times as much in a straight line and {{units.league_over_mile_road|f2}} times along the road. Narbonensis, the Mediterranean province of Gaul, behaves like Italy ({{units.narbonensis.km_per_unit_gc|f2}}). Read as miles, the league-zone legs would be {{units.gaul_as_miles_err|f2}} times shorter than the road; read as leagues, the ratio is {{units.gaul_as_leagues_err|f2}} (Figure~\ref{fig:units}). In the far east only {{units.Far east.n|int}} legs can be measured, and one unit ranges from {{units.far_east_min|f1}} to {{units.far_east_max|f1}} km: {{units.far_east_mile_like|int}} look like miles, {{units.far_east_parasang_like|int}} like parasangs of about five to seven kilometres, and the Indian legs (median {{units.india.km_per_unit_gc|f1}} km per unit) fit no single unit.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_units.png}
+\caption{Kilometres per written unit, by province (median straight-line distance per unit, with the middle half of legs).}\label{fig:units}\end{figure}
+
+\subsection{Distances}
+Converted, the written distances sit between the straight line and the road (Figure~\ref{fig:distance}). For {{dist.n_gc|int}} surviving legs in the mile and league zones the median straight line is {{dist.gc_median|f2}} of the stated distance; for the {{dist.n_road|int}} with a road distance the median road is {{dist.road_median|f2}} (middle half {{dist.road_iqr.0|f2}} to {{dist.road_iqr.1|f2}}). {{dist.road_within25_pct|f1}}\% of legs agree with the road to within 25\%, {{dist.road_within50_pct|f1}}\% to within 50\%, and {{dist.road_over2_pct|f1}}\% are off by more than a factor of two, the kind of error a dropped or doubled numeral or a misattached road would produce. The rank correlation of stated with road distance is {{dist.spearman_road|f2}}. Over long journeys errors cancel: from Rome, the Tabula's own figures give {{routes.Cologne.km|int}} km to Cologne against {{routes.Cologne.road_km|int}} km along Itiner-e, {{routes.Vienna.km|int}} against {{routes.Vienna.road_km|int}} to Vienna and {{routes.Constantinople.km|int}} against {{routes.Constantinople.road_km|int}} to Constantinople; to Antioch and Jerusalem they run about an eighth short ({{routes.Antioch.km|int}} against {{routes.Antioch.road_km|int}}, {{routes.Jerusalem.km|int}} against {{routes.Jerusalem.road_km|int}}).
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_distance.png}
+\caption{Stated against road distance for each surviving leg (log scales). The band is agreement to within 25\%.}\label{fig:distance}\end{figure}
+
+\subsection{Shape and stretch}
+The located places span about {{shape.ew_km|int}} km east to west and {{shape.ns_km|int}} km north to south, a ratio of {{shape.real_ratio|f2}}; the painted strip is {{shape.scroll_ratio|f1}} times as long as it is high. One centimetre of parchment therefore stands for {{shape.km_per_cm_ew|f1}} km east to west and {{shape.km_per_cm_ns|f1}} km north to south, a compression of {{shape.stretch_whole|f1}}. Region by region (Table~\ref{tab:regions}, Figure~\ref{fig:stretch}), North Africa is the most stretched ({{regions.North Africa.aniso|f1}}), then the Alps and Danube ({{regions.Alps and Danube.aniso|f1}}), Egypt and Cyrene ({{regions.Egypt and Cyrene.aniso|f1}}), Greece and Thrace ({{regions.Greece and Thrace.aniso|f1}}) and Italy ({{regions.Italy and islands.aniso|f1}}); Mesopotamia ({{regions.Mesopotamia and Armenia.aniso|f1}}) and Persia and India ({{regions.Persia, Central Asia and India.aniso|f1}}) the least, where the map places few names loosely. Italy and North Africa are both laid along the strip from north-west to south-east (ground bearings of {{regions.Italy and islands.scroll_bearing|int}} and {{regions.North Africa.scroll_bearing|int}} degrees). Bending Natural Earth's coastline onto the scroll through the located places (Figure~\ref{fig:warp}) puts the real Adriatic and Tyrrhenian coasts on the Tabula's seas; Figure~\ref{fig:joins} shows where the sheet joins fall on the ground.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_stretch.png}
+\caption{Stretch by region: ratio of the largest to the smallest scale of an affine fit from ground to scroll.}\label{fig:stretch}\end{figure}
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_warp.jpg}
+\caption{Italy on the scroll (sheets IV to VII) with the modern coastline carried onto it.}\label{fig:warp}\end{figure}
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_joins.png}
+\caption{Where the joins between the surviving sheets fall on the ground.}\label{fig:joins}\end{figure}
+
+\subsection{Space}
+Italy and its islands take {{regions.Italy and islands.scroll_pct|f1}}\% of the surviving scroll for {{regions.Italy and islands.land_pct|f1}}\% of the land of the provinces, {{regions.Italy and islands.space_ratio|f2}} times their share; Mesopotamia and Armenia {{regions.Mesopotamia and Armenia.space_ratio|f2}}, Greece and Thrace {{regions.Greece and Thrace.space_ratio|f2}} and the Levant {{regions.Levant.space_ratio|f2}}. Gaul ({{regions.Gaul and the Rhine.space_ratio|f2}}), North Africa ({{regions.North Africa.space_ratio|f2}}) and Asia Minor ({{regions.Asia Minor.space_ratio|f2}}) receive about their share; Egypt ({{regions.Egypt and Cyrene.space_ratio|f2}}) much less, though its province is mostly desert (Figure~\ref{fig:space}). Britain and Iberia are almost absent because their sheet is lost.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_space.png}
+\caption{Share of the surviving scroll against share of the land of the provinces of about AD 117.}\label{fig:space}\end{figure}
+
+{{TABLE_REGIONS}}
+
+\subsection{Rome}
+Rome, one of three cities drawn as an enthroned figure with Constantinople and Antioch, and the start of {{rome.degree|int}} legs, lies {{rome.frac|f1}}\% of the way along the surviving strip, in Miller's sheet {{rome.seg|raw}}; the middle of the strip falls near {{rome.middle_modern|raw}}. With one lost sheet of median width Rome would lie at {{rome.frac_one_lost|f1}}\%; it would be central with {{rome.lost_for_centre|f1}} lost sheets, and at {{rome.frac_k_lost|f1}}\% with {{rome.lost_for_centre_int|int}} (Figure~\ref{fig:rome}). If the map was designed with Rome at its centre, as some have argued \citep{talbert}, roughly three sheets, not one, are missing.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_rome.png}
+\caption{Rome's position along the strip as it survives and with one or three sheets added at the western end.}\label{fig:rome}\end{figure}
+
+\subsection{Total road and days of travel}
+The {{total.legs|int}} surviving legs with a figure add up to {{total.rm_mile_zone|int}} Roman miles, {{total.leagues|int}} leagues and {{total.far_units|int}} units in the far east, about {{total.km|int}} km ({{total.km_no_far|int}} km without the far east), some {{total.pct_of_itinere|int}}\% of the length of the Itiner-e network. Walking it would take {{total.days.foot|int}} days on foot, {{total.days.cart|int}} by cart and {{total.days.courier|int}} by courier relay. The reconstructed west adds {{recon.stated_km|int}} km; its legs behave like the Tabula's (median straight line {{recon.gc_median|f2}} of the stated distance). From Rome, the map's figures give {{routes.Constantinople.foot|int}} days on foot to Constantinople, {{routes.Jerusalem.foot|int}} to Jerusalem and {{routes.Persepolis.foot|int}} to Persepolis (Figure~\ref{fig:days}); with no sea routes, Carthage is {{routes.Carthage.km|int}} km away by land round the eastern Mediterranean.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_days.png}
+\caption{Days of travel from Rome, adding the Tabula's own figures along the shortest route.}\label{fig:days}\end{figure}
+
+\section{Limitations}
+First, the coordinates and identifications are OmnesViae's and Talbert's, used as given; east of the Euphrates many are uncertain. Second, positions on the scroll were located by eye on a nineteenth-century facsimile, which is a careful copy but not the parchment; the sample favours legible places. Third, units are assigned by province, a simplification: the change from leagues to miles does not follow province boundaries exactly. Fourth, Itiner-e road lengths include every bend of the digitised road and the shortest path can detour round gaps, so road distances lean long. Fifth, the affine fits that measure stretch are rough, since nothing on this map is straight; the scroll shares depend on where I located places; and land shares count the desert of large provinces. Sixth, routes fill legs that have no figure with estimates, and ignore the sea.
+
+\section{Conclusion}
+The Peutinger Table gives up shape for length. It flattens the world by an order of magnitude north to south, turns whole regions on their sides, and spends its parchment on Italy and the East; but along its roads it keeps count. Its figures switch from miles to leagues where its own note says they should, sit where road distances should sit, and add up over long journeys to within a few per cent of the Roman roads mapped today. It is a diagram of the road network, drawn to be travelled rather than looked at.
+
+\section*{Data and code availability}
+The interactive comparison is at \url{{{meta.page}}}. Data and code are at \url{{{meta.repo}}} and archived with this paper at \url{https://doi.org/{{meta.doi}}}. Derived data are released under CC BY 4.0 and code under the MIT licence. The facsimile is public domain; OmnesViae data are credited to Ren\'e Voorburg and Richard Talbert (no licence stated, used as factual data); Itiner-e is CC BY 4.0; DARE is CC BY-SA; Pleiades CC BY 3.0.
+
+\section*{AI statement}
+I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.
+
+\begin{thebibliography}{9}
+\bibitem[Talbert(2010)]{talbert} Talbert, R. J. A. (2010) \textit{Rome's World: the Peutinger Map Reconsidered}. Cambridge: Cambridge University Press.
+\bibitem[Voorburg(2026)]{omnesviae} Voorburg, R. (2026) OmnesViae: Roman routeplanner, based on the Peutinger map. \url{https://omnesviae.org/}
+\bibitem[Miller(1887)]{miller} Miller, K. (1887) \textit{Castori Romanorum cosmographi tabula quae dicitur Peutingeriana}. Ravensburg. Facsimile, Wikimedia Commons, public domain. \url{https://commons.wikimedia.org/wiki/File:TabulaPeutingeriana.jpg}
+\bibitem[de Soto et al.(2025)]{itinere} de Soto, P., Pa\v{z}out, A., Brughmans, T. et al. (2025) Itiner-e: the digital atlas of ancient roads. Zenodo, \url{https://doi.org/{{meta.itinere_doi}}}. CC BY 4.0.
+\bibitem[Hotham(2026)]{romanroads} Hotham, T. (2026) Roads of the Roman Empire. \url{https://maps.tristanhotham.com/roman-roads/}
+\bibitem[{\AA}hlfeldt(2026)]{dare} {\AA}hlfeldt, J. (2026) Digital Atlas of the Roman Empire (DARE), provinces. CC BY-SA.
+\bibitem[Pleiades(2026)]{pleiades} Bagnall, R. et al., eds. (2026) Pleiades: a gazetteer of past places, version {{source.pleiades_version|raw}}. CC BY 3.0. \url{https://pleiades.stoa.org/}
+\bibitem[Natural Earth(2026)]{naturalearth} Natural Earth (2026) Admin 0 countries and land, 1:50m. Public domain. \url{https://www.naturalearthdata.com/}
+\bibitem[Wikipedia(2026)]{wiki} Wikipedia contributors (2026) Roman roads (revision {{speeds.wiki_revid|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Roman_roads}
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{The located places}
+{{TABLE_LOCATED}}
+\end{document}

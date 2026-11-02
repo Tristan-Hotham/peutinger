@@ -1,0 +1,1299 @@
+{
+ "source": {
+  "places": 3322,
+  "tp": 2762,
+  "ov": 560,
+  "tp_coords": 2103,
+  "ov_coords": 471,
+  "legs": 3523,
+  "legs_dist": 3272,
+  "legs_nodist": 251,
+  "legs_surv": 2971,
+  "legs_recon": 552,
+  "pleiades_checked": 2004,
+  "pleiades_10km": 1878,
+  "pleiades_10km_pct": 93.7,
+  "pleiades_version": "4.1",
+  "symbols": 512,
+  "aquae_sym": 52,
+  "aquae_named": 27,
+  "personified": [
+   "Antiochia",
+   "Constantinopolis",
+   "Roma"
+  ],
+  "parchment_m": 6.75,
+  "parchment_cm_high": 34.0,
+  "segments": 11,
+  "miller_w": 26381,
+  "miller_h": 2014,
+  "map_px_w": 25565,
+  "map_px_h": 1223,
+  "tiles": 929
+ },
+ "units": {
+  "Mile": {
+   "n": 1488,
+   "km_per_unit_gc": 1.41,
+   "km_per_unit_road": 1.64,
+   "n_road": 1288,
+   "q25": 1.17,
+   "q75": 1.81
+  },
+  "League": {
+   "n": 279,
+   "km_per_unit_gc": 2.15,
+   "km_per_unit_road": 2.34,
+   "n_road": 270,
+   "q25": 1.84,
+   "q75": 2.44
+  },
+  "Far east": {
+   "n": 27,
+   "km_per_unit_gc": 5.24,
+   "km_per_unit_road": null,
+   "n_road": 0,
+   "q25": 2.07,
+   "q75": 11.39
+  },
+  "league_over_mile": 1.52,
+  "league_over_mile_road": 1.43,
+  "narbonensis": {
+   "n": 82,
+   "km_per_unit_gc": 1.44,
+   "km_per_unit_road": 1.64,
+   "n_road": 80,
+   "q25": 1.3,
+   "q75": 1.65
+  },
+  "by_province": {
+   "Achaia": {
+    "n": 39,
+    "km_per_unit_gc": 1.37,
+    "km_per_unit_road": 1.93,
+    "n_road": 38,
+    "q25": 1.1,
+    "q75": 2.18
+   },
+   "Africa Proconsularis": {
+    "n": 89,
+    "km_per_unit_gc": 1.5,
+    "km_per_unit_road": 1.62,
+    "n_road": 78,
+    "q25": 1.15,
+    "q75": 1.77
+   },
+   "Aquitania": {
+    "n": 55,
+    "km_per_unit_gc": 2.16,
+    "km_per_unit_road": 2.51,
+    "n_road": 52,
+    "q25": 1.89,
+    "q75": 2.56
+   },
+   "Armenia Mesopotamia": {
+    "n": 57,
+    "km_per_unit_gc": 1.51,
+    "km_per_unit_road": 1.4,
+    "n_road": 3,
+    "q25": 1.14,
+    "q75": 1.95
+   },
+   "Asia": {
+    "n": 55,
+    "km_per_unit_gc": 1.5,
+    "km_per_unit_road": 1.92,
+    "n_road": 48,
+    "q25": 1.04,
+    "q75": 2.04
+   },
+   "Belgica": {
+    "n": 50,
+    "km_per_unit_gc": 2.28,
+    "km_per_unit_road": 2.43,
+    "n_road": 50,
+    "q25": 2.02,
+    "q75": 2.49
+   },
+   "Bithynia et Pontus": {
+    "n": 27,
+    "km_per_unit_gc": 1.69,
+    "km_per_unit_road": 1.91,
+    "n_road": 23,
+    "q25": 1.17,
+    "q75": 2.4
+   },
+   "Creta et Cyrene": {
+    "n": 28,
+    "km_per_unit_gc": 1.21,
+    "km_per_unit_road": 1.63,
+    "n_road": 25,
+    "q25": 1.06,
+    "q75": 1.42
+   },
+   "Dacia": {
+    "n": 33,
+    "km_per_unit_gc": 1.32,
+    "km_per_unit_road": 1.62,
+    "n_road": 29,
+    "q25": 1.12,
+    "q75": 1.71
+   },
+   "Dalmatia": {
+    "n": 62,
+    "km_per_unit_gc": 1.37,
+    "km_per_unit_road": 1.84,
+    "n_road": 57,
+    "q25": 1.19,
+    "q75": 1.82
+   },
+   "Galatia et Cappadocia": {
+    "n": 62,
+    "km_per_unit_gc": 1.5,
+    "km_per_unit_road": 1.86,
+    "n_road": 46,
+    "q25": 1.12,
+    "q75": 2.29
+   },
+   "Germania Inferior": {
+    "n": 40,
+    "km_per_unit_gc": 2.08,
+    "km_per_unit_road": 2.27,
+    "n_road": 40,
+    "q25": 1.63,
+    "q75": 2.32
+   },
+   "Germania Superior": {
+    "n": 55,
+    "km_per_unit_gc": 2.1,
+    "km_per_unit_road": 2.26,
+    "n_road": 51,
+    "q25": 1.75,
+    "q75": 2.38
+   },
+   "Italia, regio I": {
+    "n": 54,
+    "km_per_unit_gc": 1.53,
+    "km_per_unit_road": 1.74,
+    "n_road": 54,
+    "q25": 1.24,
+    "q75": 1.87
+   },
+   "Italia, regio II": {
+    "n": 46,
+    "km_per_unit_gc": 1.43,
+    "km_per_unit_road": 1.61,
+    "n_road": 46,
+    "q25": 1.28,
+    "q75": 1.66
+   },
+   "Italia, regio III": {
+    "n": 31,
+    "km_per_unit_gc": 1.5,
+    "km_per_unit_road": 1.83,
+    "n_road": 27,
+    "q25": 1.17,
+    "q75": 1.91
+   },
+   "Italia, regio IV": {
+    "n": 35,
+    "km_per_unit_gc": 1.26,
+    "km_per_unit_road": 1.56,
+    "n_road": 32,
+    "q25": 1.07,
+    "q75": 1.53
+   },
+   "Italia, regio VII": {
+    "n": 61,
+    "km_per_unit_gc": 1.56,
+    "km_per_unit_road": 1.65,
+    "n_road": 49,
+    "q25": 1.33,
+    "q75": 2.14
+   },
+   "Italia, regio VIII": {
+    "n": 28,
+    "km_per_unit_gc": 1.45,
+    "km_per_unit_road": 1.48,
+    "n_road": 26,
+    "q25": 1.29,
+    "q75": 1.64
+   },
+   "Italia, regio X": {
+    "n": 40,
+    "km_per_unit_gc": 1.48,
+    "km_per_unit_road": 1.61,
+    "n_road": 38,
+    "q25": 1.29,
+    "q75": 1.81
+   },
+   "Iudaea": {
+    "n": 25,
+    "km_per_unit_gc": 1.4,
+    "km_per_unit_road": 1.64,
+    "n_road": 25,
+    "q25": 1.3,
+    "q75": 1.53
+   },
+   "Lugdunensis": {
+    "n": 79,
+    "km_per_unit_gc": 2.1,
+    "km_per_unit_road": 2.32,
+    "n_road": 77,
+    "q25": 1.81,
+    "q75": 2.33
+   },
+   "Macedonia": {
+    "n": 30,
+    "km_per_unit_gc": 1.29,
+    "km_per_unit_road": 1.71,
+    "n_road": 28,
+    "q25": 1.12,
+    "q75": 1.96
+   },
+   "Moesia Inferior": {
+    "n": 41,
+    "km_per_unit_gc": 1.38,
+    "km_per_unit_road": 1.71,
+    "n_road": 39,
+    "q25": 1.06,
+    "q75": 1.8
+   },
+   "Moesia Superior": {
+    "n": 26,
+    "km_per_unit_gc": 1.42,
+    "km_per_unit_road": 1.75,
+    "n_road": 26,
+    "q25": 1.26,
+    "q75": 1.59
+   },
+   "Narbonensis": {
+    "n": 82,
+    "km_per_unit_gc": 1.44,
+    "km_per_unit_road": 1.64,
+    "n_road": 80,
+    "q25": 1.3,
+    "q75": 1.65
+   },
+   "Noricum": {
+    "n": 43,
+    "km_per_unit_gc": 1.31,
+    "km_per_unit_road": 1.61,
+    "n_road": 38,
+    "q25": 1.19,
+    "q75": 1.46
+   },
+   "Numidia": {
+    "n": 45,
+    "km_per_unit_gc": 1.29,
+    "km_per_unit_road": 1.42,
+    "n_road": 37,
+    "q25": 0.94,
+    "q75": 1.9
+   },
+   "Pannonia Inferior": {
+    "n": 34,
+    "km_per_unit_gc": 1.55,
+    "km_per_unit_road": 1.6,
+    "n_road": 34,
+    "q25": 1.29,
+    "q75": 2.02
+   },
+   "Pannonia Superior": {
+    "n": 28,
+    "km_per_unit_gc": 1.37,
+    "km_per_unit_road": 1.48,
+    "n_road": 27,
+    "q25": 1.17,
+    "q75": 1.53
+   },
+   "Raetia": {
+    "n": 39,
+    "km_per_unit_gc": 1.39,
+    "km_per_unit_road": 1.78,
+    "n_road": 38,
+    "q25": 1.23,
+    "q75": 1.63
+   },
+   "Syria": {
+    "n": 71,
+    "km_per_unit_gc": 1.41,
+    "km_per_unit_road": 1.67,
+    "n_road": 63,
+    "q25": 1.17,
+    "q75": 2.04
+   },
+   "Thracia": {
+    "n": 38,
+    "km_per_unit_gc": 1.39,
+    "km_per_unit_road": 1.71,
+    "n_road": 38,
+    "q25": 1.25,
+    "q75": 1.62
+   }
+  },
+  "far_east_min": 0.8,
+  "far_east_max": 18.7,
+  "far_east_parasang_like": 9,
+  "far_east_mile_like": 8,
+  "india": {
+   "n": 13,
+   "km_per_unit_gc": 7.22,
+   "km_per_unit_road": null,
+   "n_road": 0,
+   "q25": 5.24,
+   "q75": 13.59
+  },
+  "persia": {
+   "n": 14,
+   "km_per_unit_gc": 2.07,
+   "km_per_unit_road": null,
+   "n_road": 0,
+   "q25": 1.41,
+   "q75": 5.72
+  },
+  "rm_km": 1.48,
+  "league_km": 2.22,
+  "parasang_km": 5.5,
+  "gaul_as_miles_err": 1.58,
+  "gaul_as_leagues_err": 1.05
+ },
+ "dist": {
+  "n_gc": 1767,
+  "n_road": 1558,
+  "gc_median": 0.957,
+  "road_median": 1.098,
+  "gc_short_pct": 4,
+  "road_long_pct": 10,
+  "road_within20_pct": 46.7,
+  "road_within25_pct": 52.7,
+  "gc_within25_pct": 52.6,
+  "road_within33_pct": 60.6,
+  "road_within50_pct": 70.0,
+  "road_over2_pct": 14.3,
+  "spearman_road": 0.712,
+  "spearman_gc": 0.713,
+  "median_leg_rm": 15,
+  "median_leg_km": 23.7,
+  "road_iqr": [
+   0.93,
+   1.41
+  ],
+  "snapped": 2323,
+  "network_km": 299171,
+  "snap_km": 5.0,
+  "detour": 2.0,
+  "sum_stated_km": 42703,
+  "sum_road_km": 52412,
+  "sum_ratio": 1.227,
+  "by_region": {
+   "Alps and Danube": {
+    "n": 306,
+    "road_median": 1.13,
+    "gc_median": 0.93
+   },
+   "Asia Minor": {
+    "n": 174,
+    "road_median": 1.24,
+    "gc_median": 1.01
+   },
+   "Egypt and Cyrene": {
+    "n": 32,
+    "road_median": 1.18,
+    "gc_median": 1.03
+   },
+   "Gaul and the Rhine": {
+    "n": 383,
+    "road_median": 1.06,
+    "gc_median": 0.96
+   },
+   "Greece and Thrace": {
+    "n": 119,
+    "road_median": 1.16,
+    "gc_median": 0.91
+   },
+   "Italy and islands": {
+    "n": 384,
+    "road_median": 1.09,
+    "gc_median": 0.98
+   },
+   "Levant": {
+    "n": 119,
+    "road_median": 1.1,
+    "gc_median": 0.93
+   },
+   "Mesopotamia and Armenia": {
+    "n": 74,
+    "road_median": 0.94,
+    "gc_median": 1.06
+   },
+   "North Africa": {
+    "n": 157,
+    "road_median": 1.07,
+    "gc_median": 0.92
+   }
+  }
+ },
+ "recon": {
+  "stations": 560,
+  "legs": 552,
+  "legs_dist": 552,
+  "flagged": 39,
+  "gc_median": 0.975,
+  "road_median": 1.076,
+  "n_road": 392,
+  "stated_rm": 11333,
+  "stated_km": 17313,
+  "regions": {
+   "Iberia": 305,
+   "Britain": 90,
+   "North Africa": 59,
+   "Gaul and the Rhine": 16,
+   "Italy and islands": 1
+  }
+ },
+ "total": {
+  "legs": 2720,
+  "units": 51359,
+  "rm_mile_zone": 43584,
+  "leagues": 4598,
+  "far_units": 3177,
+  "far_legs": 50,
+  "km": 79414,
+  "km_no_far": 74712,
+  "km_with_recon": 96727,
+  "nodist_legs": 251,
+  "network_km": 299171,
+  "km_rounded_k": 79,
+  "days": {
+   "foot": 3530,
+   "cart": 1765,
+   "courier": 993
+  },
+  "years_foot": 9.7,
+  "pct_of_itinere": 27,
+  "by_region": {
+   "Alps and Danube": {
+    "km": 9041,
+    "legs": 384
+   },
+   "Asia Minor": {
+    "km": 10200,
+    "legs": 306
+   },
+   "Britain": {
+    "km": 367,
+    "legs": 16
+   },
+   "Egypt and Cyrene": {
+    "km": 2196,
+    "legs": 64
+   },
+   "Gaul and the Rhine": {
+    "km": 12781,
+    "legs": 405
+   },
+   "Greece and Thrace": {
+    "km": 5513,
+    "legs": 186
+   },
+   "Iberia": {
+    "km": 81,
+    "legs": 5
+   },
+   "Italy and islands": {
+    "km": 9044,
+    "legs": 478
+   },
+   "Levant": {
+    "km": 4914,
+    "legs": 157
+   },
+   "Mesopotamia and Armenia": {
+    "km": 5051,
+    "legs": 148
+   },
+   "North Africa": {
+    "km": 7169,
+    "legs": 270
+   },
+   "Persia, Central Asia and India": {
+    "km": 4702,
+    "legs": 50
+   }
+  }
+ },
+ "speeds": {
+  "foot": {
+   "label": "On foot",
+   "kmd": 22.5
+  },
+  "cart": {
+   "label": "Horse-drawn cart",
+   "kmd": 45.0
+  },
+  "courier": {
+   "label": "Courier (relay of horses)",
+   "kmd": 80.0
+  },
+  "wiki_revid": 1383149720
+ },
+ "network": {
+  "stations": 3206,
+  "components": 6,
+  "rome_component": 3156,
+  "road_gc": 1.129,
+  "median_leg_km": 23.7,
+  "rome_degree": 12,
+  "legs_filled": 249
+ },
+ "routes": {
+  "London": {
+   "km": 1765,
+   "stations": 79,
+   "foot": 78,
+   "cart": 39,
+   "courier": 22.1,
+   "gc_km": 1433,
+   "recon_legs": 7,
+   "filled_legs": 4,
+   "legs": 79,
+   "regions": [
+    "Italy and islands",
+    "Gaul and the Rhine",
+    "Italy and islands",
+    "Gaul and the Rhine",
+    "Britain"
+   ],
+   "label": "Londinio",
+   "modern": "London"
+  },
+  "Lyon": {
+   "km": 896,
+   "stations": 59,
+   "foot": 40,
+   "cart": 20,
+   "courier": 11.2,
+   "gc_km": 750,
+   "recon_legs": 4,
+   "filled_legs": 5,
+   "legs": 59,
+   "regions": [
+    "Italy and islands",
+    "Gaul and the Rhine"
+   ],
+   "label": "Lvgdvno capvt Galliarvm",
+   "modern": "Lyon",
+   "road_km": 976,
+   "vs_road": 0.92
+  },
+  "Cologne": {
+   "km": 1487,
+   "stations": 74,
+   "foot": 66,
+   "cart": 33,
+   "courier": 18.6,
+   "gc_km": 1091,
+   "recon_legs": 5,
+   "filled_legs": 4,
+   "legs": 74,
+   "regions": [
+    "Italy and islands",
+    "Gaul and the Rhine",
+    "Italy and islands",
+    "Gaul and the Rhine"
+   ],
+   "label": "Agripina",
+   "modern": "Köln",
+   "road_km": 1444,
+   "vs_road": 1.03
+  },
+  "Carthage": {
+   "km": 6561,
+   "stations": 266,
+   "foot": 292,
+   "cart": 146,
+   "courier": 82.0,
+   "gc_km": 589,
+   "recon_legs": 0,
+   "filled_legs": 20,
+   "legs": 266,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor",
+    "Levant",
+    "Egypt and Cyrene",
+    "North Africa"
+   ],
+   "label": "Chartagine Colon̄",
+   "modern": "Tunis",
+   "road_km": 7471,
+   "vs_road": 0.88
+  },
+  "Vienna": {
+   "km": 1120,
+   "stations": 59,
+   "foot": 50,
+   "cart": 25,
+   "courier": 14.0,
+   "gc_km": 766,
+   "recon_legs": 0,
+   "filled_legs": 4,
+   "legs": 59,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube"
+   ],
+   "label": "Vindobona",
+   "modern": "Wien",
+   "road_km": 1038,
+   "vs_road": 1.08
+  },
+  "Constantinople": {
+   "km": 2081,
+   "stations": 110,
+   "foot": 92,
+   "cart": 46,
+   "courier": 26.0,
+   "gc_km": 1376,
+   "recon_legs": 0,
+   "filled_legs": 4,
+   "legs": 110,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor"
+   ],
+   "label": "Constantinopolis",
+   "modern": "İstanbul",
+   "road_km": 2335,
+   "vs_road": 0.89
+  },
+  "Athens": {
+   "km": 2209,
+   "stations": 102,
+   "foot": 98,
+   "cart": 49,
+   "courier": 27.6,
+   "gc_km": 1050,
+   "recon_legs": 0,
+   "filled_legs": 5,
+   "legs": 102,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace"
+   ],
+   "label": "Athenas",
+   "modern": "Athína",
+   "road_km": 2327,
+   "vs_road": 0.95
+  },
+  "Antioch": {
+   "km": 2980,
+   "stations": 141,
+   "foot": 132,
+   "cart": 66,
+   "courier": 37.2,
+   "gc_km": 2133,
+   "recon_legs": 0,
+   "filled_legs": 8,
+   "legs": 141,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor",
+    "Levant"
+   ],
+   "label": "ANTIOCHIA",
+   "modern": "Antakya",
+   "road_km": 3411,
+   "vs_road": 0.87
+  },
+  "Jerusalem": {
+   "km": 3499,
+   "stations": 161,
+   "foot": 156,
+   "cart": 78,
+   "courier": 43.7,
+   "gc_km": 2302,
+   "recon_legs": 0,
+   "filled_legs": 7,
+   "legs": 161,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor",
+    "Levant"
+   ],
+   "label": "Helyacapitolina",
+   "modern": "Jerusalem",
+   "road_km": 4031,
+   "vs_road": 0.87
+  },
+  "Alexandria": {
+   "km": 3800,
+   "stations": 172,
+   "foot": 169,
+   "cart": 84,
+   "courier": 47.5,
+   "gc_km": 1952,
+   "recon_legs": 0,
+   "filled_legs": 12,
+   "legs": 172,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor",
+    "Levant",
+    "Egypt and Cyrene"
+   ],
+   "label": "Alexandria",
+   "modern": null,
+   "road_km": 4549,
+   "vs_road": 0.84
+  },
+  "Ctesiphon": {
+   "km": 3937,
+   "stations": 176,
+   "foot": 175,
+   "cart": 87,
+   "courier": 49.2,
+   "gc_km": 2975,
+   "recon_legs": 0,
+   "filled_legs": 12,
+   "legs": 176,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor",
+    "Levant",
+    "Mesopotamia and Armenia"
+   ],
+   "label": "Cesiphvn",
+   "modern": "~ Bagdad"
+  },
+  "Seville": {
+   "km": 2466,
+   "stations": 117,
+   "foot": 110,
+   "cart": 55,
+   "courier": 30.8,
+   "gc_km": 1657,
+   "recon_legs": 40,
+   "filled_legs": 3,
+   "legs": 117,
+   "regions": [
+    "Italy and islands",
+    "Gaul and the Rhine",
+    "Iberia"
+   ],
+   "label": "Hispali",
+   "modern": "Sevilla",
+   "road_km": 2368,
+   "vs_road": 1.04
+  },
+  "Persepolis": {
+   "km": 4337,
+   "stations": 187,
+   "foot": 193,
+   "cart": 96,
+   "courier": 54.2,
+   "gc_km": 3832,
+   "recon_legs": 0,
+   "filled_legs": 10,
+   "legs": 187,
+   "regions": [
+    "Italy and islands",
+    "Alps and Danube",
+    "Greece and Thrace",
+    "Asia Minor",
+    "Mesopotamia and Armenia",
+    "Persia, Central Asia and India"
+   ],
+   "label": "Persepoliscon Mercivm persarvm",
+   "modern": "Taht-i-Djamshid"
+  }
+ },
+ "farthest": {
+  "km": 6962,
+  "label": "Rvsibricari Matidi(a)e",
+  "modern": null,
+  "id": "TPPlace1",
+  "foot": 309,
+  "cart": 155,
+  "courier": 87,
+  "lat": 36.8,
+  "lon": 3.56
+ },
+ "located": {
+  "n": 465,
+  "high": 433,
+  "medium": 32,
+  "regions": {
+   "Britain": 3,
+   "Iberia": 1,
+   "Gaul and the Rhine": 65,
+   "Italy and islands": 129,
+   "North Africa": 39,
+   "Alps and Danube": 51,
+   "Greece and Thrace": 38,
+   "Asia Minor": 57,
+   "Egypt and Cyrene": 15,
+   "Levant": 36,
+   "Mesopotamia and Armenia": 20,
+   "Persia, Central Asia and India": 11
+  },
+  "segments": {
+   "II": 43,
+   "III": 42,
+   "IV": 57,
+   "V": 46,
+   "VI": 58,
+   "VII": 46,
+   "VIII": 37,
+   "IX": 41,
+   "X": 57,
+   "XI": 25,
+   "XII": 13
+  },
+  "min_per_segment": 13
+ },
+ "shape": {
+  "x_r2_E": 0.879,
+  "y_r2_N": 0.519,
+  "x_spearman_lon": 0.977,
+  "y_spearman_lat": 0.737,
+  "ew_px_per_km": 4.77,
+  "ns_px_per_km": 1.165,
+  "ew_km": 8526,
+  "ns_km": 4676,
+  "real_ratio": 1.82,
+  "scroll_ratio": 20.9,
+  "west": "Gesocribate",
+  "east": "Palibotra",
+  "north": "Lvgdvno",
+  "south": "Mvzeris",
+  "cm_per_px": 0.0264,
+  "squash": 11.5,
+  "km_per_cm_ew": 12.6,
+  "km_per_cm_ns": 137.5,
+  "stretch_whole": 10.9
+ },
+ "regions": {
+  "Britain": {
+   "region": "Britain",
+   "located": 3,
+   "scroll_pct": 0.5,
+   "stations_pct": 0.7,
+   "land_pct": 3.0,
+   "land_km2": 144651,
+   "road_km": 367,
+   "stations": 15,
+   "recon_stations": 90,
+   "space_ratio": 0.17
+  },
+  "Iberia": {
+   "region": "Iberia",
+   "located": 1,
+   "scroll_pct": 0.4,
+   "stations_pct": 0.2,
+   "land_pct": 12.0,
+   "land_km2": 587450,
+   "road_km": 81,
+   "stations": 5,
+   "recon_stations": 305,
+   "space_ratio": 0.03
+  },
+  "Gaul and the Rhine": {
+   "region": "Gaul and the Rhine",
+   "located": 65,
+   "scroll_pct": 12.5,
+   "stations_pct": 17.8,
+   "land_pct": 14.0,
+   "land_km2": 684499,
+   "road_km": 12781,
+   "stations": 375,
+   "recon_stations": 16,
+   "ew_px_per_100km": 491.1,
+   "ns_px_per_100km": 86.3,
+   "ew_ns": 5.7,
+   "km_per_cm_ew": 7.7,
+   "km_per_cm_ns": 43.9,
+   "fit_res_px": 283,
+   "scroll_bearing": 110,
+   "aniso": 7.2,
+   "span_ew_km": 1020,
+   "span_ns_km": 1056,
+   "space_ratio": 0.89
+  },
+  "Italy and islands": {
+   "region": "Italy and islands",
+   "located": 129,
+   "scroll_pct": 17.3,
+   "stations_pct": 21.4,
+   "land_pct": 6.6,
+   "land_km2": 321040,
+   "road_km": 9044,
+   "stations": 449,
+   "recon_stations": 1,
+   "ew_px_per_100km": 853.7,
+   "ns_px_per_100km": 440.1,
+   "ew_ns": 1.9,
+   "km_per_cm_ew": 4.4,
+   "km_per_cm_ns": 8.6,
+   "fit_res_px": 590,
+   "scroll_bearing": 132,
+   "aniso": 10.2,
+   "span_ew_km": 891,
+   "span_ns_km": 1001,
+   "space_ratio": 2.62
+  },
+  "North Africa": {
+   "region": "North Africa",
+   "located": 39,
+   "scroll_pct": 11.2,
+   "stations_pct": 9.7,
+   "land_pct": 13.6,
+   "land_km2": 663582,
+   "road_km": 7169,
+   "stations": 203,
+   "recon_stations": 59,
+   "ew_px_per_100km": 1489.2,
+   "ns_px_per_100km": 168.3,
+   "ew_ns": 8.9,
+   "km_per_cm_ew": 2.5,
+   "km_per_cm_ns": 22.5,
+   "fit_res_px": 346,
+   "scroll_bearing": 139,
+   "aniso": 55.4,
+   "span_ew_km": 939,
+   "span_ns_km": 516,
+   "space_ratio": 0.82
+  },
+  "Alps and Danube": {
+   "region": "Alps and Danube",
+   "located": 51,
+   "scroll_pct": 11.4,
+   "stations_pct": 16.2,
+   "land_pct": 10.6,
+   "land_km2": 518342,
+   "road_km": 9041,
+   "stations": 341,
+   "recon_stations": 0,
+   "ew_px_per_100km": 693.2,
+   "ns_px_per_100km": 281.5,
+   "ew_ns": 2.5,
+   "km_per_cm_ew": 5.5,
+   "km_per_cm_ns": 13.5,
+   "fit_res_px": 489,
+   "scroll_bearing": 103,
+   "aniso": 21.3,
+   "span_ew_km": 1438,
+   "span_ns_km": 780,
+   "space_ratio": 1.08
+  },
+  "Greece and Thrace": {
+   "region": "Greece and Thrace",
+   "located": 38,
+   "scroll_pct": 8.2,
+   "stations_pct": 7.0,
+   "land_pct": 5.3,
+   "land_km2": 259116,
+   "road_km": 5513,
+   "stations": 147,
+   "recon_stations": 0,
+   "ew_px_per_100km": 554.1,
+   "ns_px_per_100km": 113.1,
+   "ew_ns": 4.9,
+   "km_per_cm_ew": 6.8,
+   "km_per_cm_ns": 33.5,
+   "fit_res_px": 399,
+   "scroll_bearing": 79,
+   "aniso": 11.1,
+   "span_ew_km": 729,
+   "span_ns_km": 849,
+   "space_ratio": 1.55
+  },
+  "Asia Minor": {
+   "region": "Asia Minor",
+   "located": 57,
+   "scroll_pct": 11.1,
+   "stations_pct": 11.0,
+   "land_pct": 11.2,
+   "land_km2": 546172,
+   "road_km": 10200,
+   "stations": 231,
+   "recon_stations": 0,
+   "ew_px_per_100km": 287.2,
+   "ns_px_per_100km": 320.2,
+   "ew_ns": 0.9,
+   "km_per_cm_ew": 13.2,
+   "km_per_cm_ns": 11.8,
+   "fit_res_px": 337,
+   "scroll_bearing": 115,
+   "aniso": 7.9,
+   "span_ew_km": 1176,
+   "span_ns_km": 807,
+   "space_ratio": 0.99
+  },
+  "Egypt and Cyrene": {
+   "region": "Egypt and Cyrene",
+   "located": 15,
+   "scroll_pct": 3.5,
+   "stations_pct": 2.6,
+   "land_pct": 14.8,
+   "land_km2": 723651,
+   "road_km": 2196,
+   "stations": 55,
+   "recon_stations": 0,
+   "ew_px_per_100km": 228.5,
+   "ns_px_per_100km": 185.1,
+   "ew_ns": 1.2,
+   "km_per_cm_ew": 16.6,
+   "km_per_cm_ns": 20.5,
+   "fit_res_px": 121,
+   "scroll_bearing": 87,
+   "aniso": 18.7,
+   "span_ew_km": 1243,
+   "span_ns_km": 979,
+   "space_ratio": 0.24
+  },
+  "Levant": {
+   "region": "Levant",
+   "located": 36,
+   "scroll_pct": 6.3,
+   "stations_pct": 5.9,
+   "land_pct": 4.7,
+   "land_km2": 230965,
+   "road_km": 4914,
+   "stations": 125,
+   "recon_stations": 0,
+   "ew_px_per_100km": 444.3,
+   "ns_px_per_100km": 304.3,
+   "ew_ns": 1.5,
+   "km_per_cm_ew": 8.5,
+   "km_per_cm_ns": 12.4,
+   "fit_res_px": 105,
+   "scroll_bearing": 30,
+   "aniso": 5.8,
+   "span_ew_km": 399,
+   "span_ns_km": 807,
+   "space_ratio": 1.34
+  },
+  "Mesopotamia and Armenia": {
+   "region": "Mesopotamia and Armenia",
+   "located": 20,
+   "scroll_pct": 9.4,
+   "stations_pct": 5.4,
+   "land_pct": 4.1,
+   "land_km2": 200266,
+   "road_km": 5051,
+   "stations": 114,
+   "recon_stations": 0,
+   "ew_px_per_100km": 158.8,
+   "ns_px_per_100km": 102.0,
+   "ew_ns": 1.6,
+   "km_per_cm_ew": 23.8,
+   "km_per_cm_ns": 37.1,
+   "fit_res_px": 459,
+   "scroll_bearing": 102,
+   "aniso": 2.1,
+   "span_ew_km": 925,
+   "span_ns_km": 1472,
+   "space_ratio": 2.29
+  },
+  "Persia, Central Asia and India": {
+   "region": "Persia, Central Asia and India",
+   "located": 11,
+   "scroll_pct": 8.2,
+   "stations_pct": 2.0,
+   "land_pct": null,
+   "land_km2": null,
+   "road_km": 4702,
+   "stations": 43,
+   "recon_stations": 0,
+   "ew_px_per_100km": 21.1,
+   "ns_px_per_100km": 27.3,
+   "ew_ns": 0.8,
+   "km_per_cm_ew": 179.8,
+   "km_per_cm_ns": 138.6,
+   "fit_res_px": 464,
+   "scroll_bearing": 105,
+   "aniso": 1.7,
+   "span_ew_km": 3200,
+   "span_ns_km": 3060,
+   "space_ratio": null
+  }
+ },
+ "stretch_rank": [
+  "North Africa",
+  "Alps and Danube",
+  "Egypt and Cyrene",
+  "Greece and Thrace",
+  "Italy and islands",
+  "Asia Minor",
+  "Gaul and the Rhine",
+  "Levant",
+  "Mesopotamia and Armenia",
+  "Persia, Central Asia and India"
+ ],
+ "stretch_median": 9.1,
+ "ew_ns_median": 1.8,
+ "space_rank": [
+  "Italy and islands",
+  "Mesopotamia and Armenia",
+  "Greece and Thrace",
+  "Levant",
+  "Alps and Danube",
+  "Asia Minor",
+  "Gaul and the Rhine",
+  "North Africa",
+  "Egypt and Cyrene",
+  "Britain",
+  "Iberia"
+ ],
+ "scroll_rank": [
+  "Italy and islands",
+  "Gaul and the Rhine",
+  "Alps and Danube",
+  "North Africa",
+  "Asia Minor",
+  "Mesopotamia and Armenia",
+  "Greece and Thrace",
+  "Persia, Central Asia and India",
+  "Levant",
+  "Egypt and Cyrene",
+  "Britain",
+  "Iberia"
+ ],
+ "rome": {
+  "x": 9505,
+  "y": 1005,
+  "frac": 35.4,
+  "seg": "V",
+  "seg_median_px": 2272,
+  "frac_one_lost": 40.7,
+  "lost_for_centre": 3.3,
+  "y_frac": 56,
+  "degree": 12,
+  "cm_from_left": 239,
+  "cm_from_right": 436,
+  "lost_for_centre_int": 3,
+  "frac_k_lost": 49.0,
+  "middle_place": "Scviris",
+  "middle_modern": "Skopje",
+  "middle_seg": "VII"
+ },
+ "segments": [
+  {
+   "seg": "II",
+   "x0": 455,
+   "x1": 2632,
+   "w": 2177,
+   "located": 43,
+   "main": "Gaul and the Rhine"
+  },
+  {
+   "seg": "III",
+   "x0": 2632,
+   "x1": 4904,
+   "w": 2272,
+   "located": 42,
+   "main": "Gaul and the Rhine"
+  },
+  {
+   "seg": "IV",
+   "x0": 4904,
+   "x1": 7401,
+   "w": 2497,
+   "located": 57,
+   "main": "Italy and islands"
+  },
+  {
+   "seg": "V",
+   "x0": 7401,
+   "x1": 9658,
+   "w": 2257,
+   "located": 46,
+   "main": "Italy and islands"
+  },
+  {
+   "seg": "VI",
+   "x0": 9658,
+   "x1": 11894,
+   "w": 2236,
+   "located": 58,
+   "main": "Italy and islands"
+  },
+  {
+   "seg": "VII",
+   "x0": 11894,
+   "x1": 14085,
+   "w": 2191,
+   "located": 46,
+   "main": "Greece and Thrace"
+  },
+  {
+   "seg": "VIII",
+   "x0": 14085,
+   "x1": 16458,
+   "w": 2373,
+   "located": 37,
+   "main": "Greece and Thrace"
+  },
+  {
+   "seg": "IX",
+   "x0": 16458,
+   "x1": 18606,
+   "w": 2148,
+   "located": 41,
+   "main": "Asia Minor"
+  },
+  {
+   "seg": "X",
+   "x0": 18606,
+   "x1": 20962,
+   "w": 2356,
+   "located": 57,
+   "main": "Asia Minor"
+  },
+  {
+   "seg": "XI",
+   "x0": 20962,
+   "x1": 23552,
+   "w": 2590,
+   "located": 25,
+   "main": "Mesopotamia and Armenia"
+  },
+  {
+   "seg": "XII",
+   "x0": 23552,
+   "x1": 26020,
+   "w": 2468,
+   "located": 13,
+   "main": "Persia, Central Asia and India"
+  }
+ ],
+ "warp": {
+  "smoothing": 5.0,
+  "joins": 14,
+  "lines": 48,
+  "km": 150
+ },
+ "meta": {
+  "page": "https://maps.tristanhotham.com/peutinger/",
+  "repo": "https://github.com/Tristan-Hotham/peutinger",
+  "slug": "peutinger",
+  "ov_url": "https://omnesviae.org/",
+  "miller_url": "https://commons.wikimedia.org/wiki/File:TabulaPeutingeriana.jpg",
+  "itinere_doi": "10.5281/zenodo.17122148"
+ }
+}

@@ -1,0 +1,14 @@
+to,km,stations,foot,cart,courier,gc_km,recon_legs,filled_legs,legs,regions,label,modern,road_km,vs_road
+London,1765,79,78,39,22.1,1433,7,4,79,"['Italy and islands', 'Gaul and the Rhine', 'Italy and islands', 'Gaul and the Rhine', 'Britain']",Londinio,London,,
+Lyon,896,59,40,20,11.2,750,4,5,59,"['Italy and islands', 'Gaul and the Rhine']",Lvgdvno capvt Galliarvm,Lyon,976.0,0.92
+Cologne,1487,74,66,33,18.6,1091,5,4,74,"['Italy and islands', 'Gaul and the Rhine', 'Italy and islands', 'Gaul and the Rhine']",Agripina,Köln,1444.0,1.03
+Carthage,6561,266,292,146,82.0,589,0,20,266,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor', 'Levant', 'Egypt and Cyrene', 'North Africa']",Chartagine Colon̄,Tunis,7471.0,0.88
+Vienna,1120,59,50,25,14.0,766,0,4,59,"['Italy and islands', 'Alps and Danube']",Vindobona,Wien,1038.0,1.08
+Constantinople,2081,110,92,46,26.0,1376,0,4,110,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor']",Constantinopolis,İstanbul,2335.0,0.89
+Athens,2209,102,98,49,27.6,1050,0,5,102,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace']",Athenas,Athína,2327.0,0.95
+Antioch,2980,141,132,66,37.2,2133,0,8,141,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor', 'Levant']",ANTIOCHIA,Antakya,3411.0,0.87
+Jerusalem,3499,161,156,78,43.7,2302,0,7,161,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor', 'Levant']",Helyacapitolina,Jerusalem,4031.0,0.87
+Alexandria,3800,172,169,84,47.5,1952,0,12,172,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor', 'Levant', 'Egypt and Cyrene']",Alexandria,,4549.0,0.84
+Ctesiphon,3937,176,175,87,49.2,2975,0,12,176,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor', 'Levant', 'Mesopotamia and Armenia']",Cesiphvn,~ Bagdad,,
+Seville,2466,117,110,55,30.8,1657,40,3,117,"['Italy and islands', 'Gaul and the Rhine', 'Iberia']",Hispali,Sevilla,2368.0,1.04
+Persepolis,4337,187,193,96,54.2,3832,0,10,187,"['Italy and islands', 'Alps and Danube', 'Greece and Thrace', 'Asia Minor', 'Mesopotamia and Armenia', 'Persia, Central Asia and India']",Persepoliscon Mercivm persarvm,Taht-i-Djamshid,,

@@ -1,0 +1,9 @@
+{
+ "snap_km": 5.0,
+ "detour": 2.0,
+ "snapped": 2323,
+ "legs_snapped": 2134,
+ "legs_road": 2081,
+ "network_km": 299171,
+ "sections": 14769
+}
